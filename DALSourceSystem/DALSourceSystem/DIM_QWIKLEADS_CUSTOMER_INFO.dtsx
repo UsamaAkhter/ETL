@@ -1,0 +1,1181 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="12/22/2022 11:17:01 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DC2-DWHS-V-02"
+  DTS:CreatorName="SALE-CO\nalsalem"
+  DTS:DTSID="{D22BF71B-C779-45BF-934F-37F4D8CE99C5}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.1601.5"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="DIM_QWIKLEADS_CUSTOMER_INFO"
+  DTS:PackageType="5"
+  DTS:VersionBuild="19"
+  DTS:VersionGUID="{004175AD-F0B6-4BBC-9434-CE5FECCBB98C}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2F42ECCC-70EB-427D-8D03-6C8E95E22A3B}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="GET_ETL_DATE">
+      <DTS:VariableValue
+        DTS:DataType="8">2020-01-01 00:00:00:000</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D2D5A6CE-E4A2-43B3-9CA4-702036B93373}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;&#xA;SELECT * FROM EBS_Connect_Stag1.dbo.[W_QWIKLEADS_CUSTOMER_INFO_V]&#xA;where updatedOn &gt;'&quot; + @[User::GET_ETL_DATE] + &quot;'&#xA;&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceQuery">
+      <DTS:VariableValue
+        DTS:DataType="8">
+SELECT * FROM EBS_Connect_Stag1.dbo.[W_QWIKLEADS_CUSTOMER_INFO_V]
+where updatedOn &gt;'2020-01-01 00:00:00:000'
+</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{07FD3B8E-2BFB-453F-B1FB-23C2AFDE06BF}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DIM_QWIKLEADS_CUSTOMER_INFO_TEMP"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DIM_QWIKLEADS_CUSTOMER_INFO_TEMP]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Connections[OleDbConnection]"
+                  connectionManagerID="{78779782-C63A-46A8-AFA5-227BB8602DA6}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].Columns[ID]"
+                      cachedDataType="guid"
+                      cachedName="ID"
+                      externalMetadataColumnId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[ID]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ID]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].Columns[CUSTOMER_NAME]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="CUSTOMER_NAME"
+                      externalMetadataColumnId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[CUSTOMER_NAME]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[CUSTOMER_NAME]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].Columns[PHONE]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="PHONE"
+                      externalMetadataColumnId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[PHONE]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[PHONE]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].Columns[EMAIL]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="EMAIL"
+                      externalMetadataColumnId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[EMAIL]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EMAIL]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].Columns[CR]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="CR"
+                      externalMetadataColumnId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[CR]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[CR]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].Columns[INDUSTRY]"
+                      cachedDataType="guid"
+                      cachedName="INDUSTRY"
+                      externalMetadataColumnId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[INDUSTRY]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[INDUSTRY]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].Columns[NUMOFBRANCH]"
+                      cachedDataType="i4"
+                      cachedName="NUMOFBRANCH"
+                      externalMetadataColumnId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[NUMOFBRANCH]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[NUMOFBRANCH]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].Columns[ISCREDIT]"
+                      cachedDataType="bool"
+                      cachedName="ISCREDIT"
+                      externalMetadataColumnId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[ISCREDIT]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ISCREDIT]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].Columns[ISCREDITAPPROVED]"
+                      cachedDataType="bool"
+                      cachedName="ISCREDITAPPROVED"
+                      externalMetadataColumnId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[ISCREDITAPPROVED]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ISCREDITAPPROVED]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].Columns[PAYMENTSECURITYTYPE]"
+                      cachedDataType="guid"
+                      cachedName="PAYMENTSECURITYTYPE"
+                      externalMetadataColumnId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[PAYMENTSECURITYTYPE]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[PAYMENTSECURITYTYPE]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].Columns[CREDITREASON]"
+                      cachedDataType="guid"
+                      cachedName="CREDITREASON"
+                      externalMetadataColumnId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[CREDITREASON]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[CREDITREASON]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].Columns[CREDITOTHERREASON]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="CREDITOTHERREASON"
+                      externalMetadataColumnId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[CREDITOTHERREASON]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[CREDITOTHERREASON]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].Columns[CUSTOMERTIN]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="CUSTOMERTIN"
+                      externalMetadataColumnId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[CUSTOMERTIN]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[CUSTOMERTIN]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].Columns[ISACTIVE]"
+                      cachedDataType="bool"
+                      cachedName="ISACTIVE"
+                      externalMetadataColumnId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[ISACTIVE]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ISACTIVE]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].Columns[UPDATEDON]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="UPDATEDON"
+                      externalMetadataColumnId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[UPDATEDON]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[UPDATEDON]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[ID]"
+                      dataType="guid"
+                      name="ID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[CUSTOMER_NAME]"
+                      dataType="wstr"
+                      length="100"
+                      name="CUSTOMER_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[PHONE]"
+                      dataType="wstr"
+                      length="10"
+                      name="PHONE" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[EMAIL]"
+                      dataType="wstr"
+                      length="50"
+                      name="EMAIL" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[CR]"
+                      dataType="wstr"
+                      length="10"
+                      name="CR" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[INDUSTRY]"
+                      dataType="guid"
+                      name="INDUSTRY" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[NUMOFBRANCH]"
+                      dataType="i4"
+                      name="NUMOFBRANCH" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[ISCREDIT]"
+                      dataType="bool"
+                      name="ISCREDIT" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[ISCREDITAPPROVED]"
+                      dataType="bool"
+                      name="ISCREDITAPPROVED" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[PAYMENTSECURITYTYPE]"
+                      dataType="guid"
+                      name="PAYMENTSECURITYTYPE" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[CREDITREASON]"
+                      dataType="guid"
+                      name="CREDITREASON" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[CREDITOTHERREASON]"
+                      dataType="wstr"
+                      length="150"
+                      name="CREDITOTHERREASON" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[CUSTOMERTIN]"
+                      dataType="wstr"
+                      length="15"
+                      name="CUSTOMERTIN" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[ISACTIVE]"
+                      dataType="bool"
+                      name="ISACTIVE" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[UPDATEDON]"
+                      dataType="dbTimeStamp"
+                      name="UPDATEDON" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[W_QWIKLEADS_CUSTOMER_INFO_V]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="{78779782-C63A-46A8-AFA5-227BB8602DA6}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ID]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ID]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ID]"
+                      name="ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[CUSTOMER_NAME]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CUSTOMER_NAME]"
+                      length="100"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[CUSTOMER_NAME]"
+                      name="CUSTOMER_NAME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[PHONE]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PHONE]"
+                      length="10"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[PHONE]"
+                      name="PHONE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EMAIL]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EMAIL]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EMAIL]"
+                      name="EMAIL"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[CR]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CR]"
+                      length="10"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[CR]"
+                      name="CR"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[INDUSTRY]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[INDUSTRY]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[INDUSTRY]"
+                      name="INDUSTRY"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[NUMOFBRANCH]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NUMOFBRANCH]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[NUMOFBRANCH]"
+                      name="NUMOFBRANCH"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ISCREDIT]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ISCREDIT]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ISCREDIT]"
+                      name="ISCREDIT"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ISCREDITAPPROVED]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ISCREDITAPPROVED]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ISCREDITAPPROVED]"
+                      name="ISCREDITAPPROVED"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[PAYMENTSECURITYTYPE]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PAYMENTSECURITYTYPE]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[PAYMENTSECURITYTYPE]"
+                      name="PAYMENTSECURITYTYPE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[CREDITREASON]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CREDITREASON]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[CREDITREASON]"
+                      name="CREDITREASON"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[CREDITOTHERREASON]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CREDITOTHERREASON]"
+                      length="150"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[CREDITOTHERREASON]"
+                      name="CREDITOTHERREASON"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[CUSTOMERTIN]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CUSTOMERTIN]"
+                      length="15"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[CUSTOMERTIN]"
+                      name="CUSTOMERTIN"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ISACTIVE]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ISACTIVE]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ISACTIVE]"
+                      name="ISACTIVE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[UPDATEDON]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[UPDATEDON]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[UPDATEDON]"
+                      name="UPDATEDON"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ID]"
+                      dataType="guid"
+                      name="ID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CUSTOMER_NAME]"
+                      dataType="wstr"
+                      length="100"
+                      name="CUSTOMER_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PHONE]"
+                      dataType="wstr"
+                      length="10"
+                      name="PHONE" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EMAIL]"
+                      dataType="wstr"
+                      length="50"
+                      name="EMAIL" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CR]"
+                      dataType="wstr"
+                      length="10"
+                      name="CR" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[INDUSTRY]"
+                      dataType="guid"
+                      name="INDUSTRY" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NUMOFBRANCH]"
+                      dataType="i4"
+                      name="NUMOFBRANCH" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ISCREDIT]"
+                      dataType="bool"
+                      name="ISCREDIT" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ISCREDITAPPROVED]"
+                      dataType="bool"
+                      name="ISCREDITAPPROVED" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PAYMENTSECURITYTYPE]"
+                      dataType="guid"
+                      name="PAYMENTSECURITYTYPE" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CREDITREASON]"
+                      dataType="guid"
+                      name="CREDITREASON" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CREDITOTHERREASON]"
+                      dataType="wstr"
+                      length="150"
+                      name="CREDITOTHERREASON" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CUSTOMERTIN]"
+                      dataType="wstr"
+                      length="15"
+                      name="CUSTOMERTIN" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ISACTIVE]"
+                      dataType="bool"
+                      name="ISACTIVE" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[UPDATEDON]"
+                      dataType="dbTimeStamp"
+                      name="UPDATEDON" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ID]"
+                      dataType="guid"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ID]"
+                      name="ID" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CUSTOMER_NAME]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CUSTOMER_NAME]"
+                      name="CUSTOMER_NAME" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PHONE]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PHONE]"
+                      name="PHONE" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EMAIL]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EMAIL]"
+                      name="EMAIL" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CR]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CR]"
+                      name="CR" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[INDUSTRY]"
+                      dataType="guid"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[INDUSTRY]"
+                      name="INDUSTRY" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NUMOFBRANCH]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NUMOFBRANCH]"
+                      name="NUMOFBRANCH" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ISCREDIT]"
+                      dataType="bool"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ISCREDIT]"
+                      name="ISCREDIT" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ISCREDITAPPROVED]"
+                      dataType="bool"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ISCREDITAPPROVED]"
+                      name="ISCREDITAPPROVED" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PAYMENTSECURITYTYPE]"
+                      dataType="guid"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PAYMENTSECURITYTYPE]"
+                      name="PAYMENTSECURITYTYPE" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CREDITREASON]"
+                      dataType="guid"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CREDITREASON]"
+                      name="CREDITREASON" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CREDITOTHERREASON]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CREDITOTHERREASON]"
+                      name="CREDITOTHERREASON" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CUSTOMERTIN]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CUSTOMERTIN]"
+                      name="CUSTOMERTIN" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ISACTIVE]"
+                      dataType="bool"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ISACTIVE]"
+                      name="ISACTIVE" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[UPDATEDON]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[UPDATEDON]"
+                      name="UPDATEDON" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[OLE DB Source Output]"
+              endId="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get ETL Date"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{25694685-DFBA-4F46-B280-BD0BC601E6A7}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get ETL Date"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{649F1921-5B49-4DCF-9547-373918113F06}"
+          SQLTask:SqlStatementSource="exec GetLastETLDate 'DIM_QWIKLEADS_CUSTOMER_INFO'&#xA;&#xA;"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::GET_ETL_DATE" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\GetMaxLastUpdateDate"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{1752B518-0DAB-438F-AE51-58FB59A1DFB8}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="GetMaxLastUpdateDate"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{62D76C91-CFF8-4A96-A342-97119FF0C8BC}"
+          SQLTask:SqlStatementSource=" SELECT MAX(updatedOn) FROM  &#xA;[DIM_QWIKLEADS_CUSTOMER_INFO]"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::GET_ETL_DATE" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Merge Temp And Table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{FA786CB2-742A-4C0B-82BA-034FDF5E9480}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Merge Temp And Table"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{62D76C91-CFF8-4A96-A342-97119FF0C8BC}"
+          SQLTask:SqlStatementSource="MERGE [EBS_Connect_DWH].[dbo].[DIM_QWIKLEADS_CUSTOMER_INFO] D&#xA;USING [EBS_Connect_Stag1].[dbo].[DIM_QWIKLEADS_CUSTOMER_INFO_TEMP] TEM&#xA;ON D.[id]= TEM.[id]&#xA;WHEN NOT MATCHED THEN INSERT&#xA;(  &#xA;[ID]&#xA;      ,[CUSTOMER_NAME]&#xA;      ,[PHONE]&#xA;      ,[EMAIL]&#xA;      ,[CR]&#xA;      ,[INDUSTRY]&#xA;      ,[NUMOFBRANCH]&#xA;      ,[ISCREDIT]&#xA;      ,[ISCREDITAPPROVED]&#xA;      ,[PAYMENTSECURITYTYPE]&#xA;      ,[CREDITREASON]&#xA;      ,[CREDITOTHERREASON]&#xA;      ,[CUSTOMERTIN]&#xA;      ,[ISACTIVE]&#xA;      ,[UPDATEDON]&#xA;    &#xA;&#xA;)&#xA;VALUES&#xA;(   &#xA; TEM.[ID]&#xA;      ,TEM.[CUSTOMER_NAME]&#xA;      ,TEM.[PHONE]&#xA;      ,TEM.[EMAIL]&#xA;      ,TEM.[CR]&#xA;      ,TEM.[INDUSTRY]&#xA;      ,TEM.[NUMOFBRANCH]&#xA;      ,TEM.[ISCREDIT]&#xA;      ,TEM.[ISCREDITAPPROVED]&#xA;      ,TEM.[PAYMENTSECURITYTYPE]&#xA;      ,TEM.[CREDITREASON]&#xA;      ,TEM.[CREDITOTHERREASON]&#xA;      ,TEM.[CUSTOMERTIN]&#xA;      ,TEM.[ISACTIVE]&#xA;      ,TEM.[UPDATEDON] &#xA;)  &#xA;&#xA;&#xA;WHEN MATCHED THEN UPDATE SET&#xA;D.[id]=TEM.[ID]&#xA;      ,D.[CUSTOMER_NAME]=TEM.[CUSTOMER_NAME]&#xA;      ,D.[PHONE]=TEM.[PHONE]&#xA;      ,D.[EMAIL]=TEM.[EMAIL]&#xA;      ,D.[CR]=TEM.[CR]&#xA;      ,D.[INDUSTRY]=TEM.[INDUSTRY]&#xA;      ,D.[NUMOFBRANCH]=TEM.[NUMOFBRANCH]&#xA;      ,D.[ISCREDIT]=TEM.[ISCREDIT]&#xA;      ,D.[ISCREDITAPPROVED]=TEM.[ISCREDITAPPROVED]&#xA;      ,D.[PAYMENTSECURITYTYPE]=TEM.[PAYMENTSECURITYTYPE]&#xA;      ,D.[CREDITREASON]=TEM.[CREDITREASON]&#xA;      ,D.[CREDITOTHERREASON]=TEM.[CREDITOTHERREASON]&#xA;      ,D.[CUSTOMERTIN]=TEM.[CUSTOMERTIN]&#xA;      ,D.[ISACTIVE]=TEM.[ISACTIVE]&#xA;      ,D.[UPDATEDON]=TEM.[UPDATEDON]  &#xA;;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate DIM_QWIKLEADS_CUSTOMER_INFO_TEMP"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{2F83FCD9-371F-411E-B91C-4AEA27405725}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate DIM_QWIKLEADS_CUSTOMER_INFO_TEMP"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{78779782-C63A-46A8-AFA5-227BB8602DA6}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE DIM_QWIKLEADS_CUSTOMER_INFO_TEMP" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{000EBB6B-EA72-45D8-A819-721CC4F4AB9F}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate table"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{78779782-C63A-46A8-AFA5-227BB8602DA6}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE DIM_QWIKLEADS_CUSTOMER_INFO_TEMP" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\UpdateETLDate"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{6D24E21E-5951-4B08-B8CE-670A2E303638}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="UpdateETLDate"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{649F1921-5B49-4DCF-9547-373918113F06}"
+          SQLTask:SqlStatementSource="EXEC UpdatePackageETLDate 'DIM_QWIKLEADS_CUSTOMER_INFO',?"
+          SQLTask:TypeConversionMode="None" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::GET_ETL_DATE"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{FBD84947-6657-4FDC-8F17-2460172163B2}"
+      DTS:From="Package\Truncate DIM_QWIKLEADS_CUSTOMER_INFO_TEMP"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Get ETL Date" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{B108F320-46A9-4483-BC54-A2D60DD7AC49}"
+      DTS:From="Package\Get ETL Date"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Data Flow Task" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{8EE897DD-E520-4226-A256-FEB54CEE62F6}"
+      DTS:From="Package\Data Flow Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Merge Temp And Table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{A34799E1-F5F9-4483-94CE-3185E058F332}"
+      DTS:From="Package\Merge Temp And Table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\GetMaxLastUpdateDate" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{40220387-A966-4D32-A2B4-85030C297BDD}"
+      DTS:From="Package\GetMaxLastUpdateDate"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\UpdateETLDate" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{8F49E34E-141F-48FE-A892-6F3D5BB3B7F7}"
+      DTS:From="Package\UpdateETLDate"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Truncate table" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Data Flow Task"
+          TopLeft="180.5,160.5" />
+        <NodeLayout
+          Size="141,42"
+          Id="Package\Get ETL Date"
+          TopLeft="21,75" />
+        <NodeLayout
+          Size="189,42"
+          Id="Package\GetMaxLastUpdateDate"
+          TopLeft="174,361.5" />
+        <NodeLayout
+          Size="189,42"
+          Id="Package\Merge Temp And Table"
+          TopLeft="174,259.5" />
+        <NodeLayout
+          Size="329,42"
+          Id="Package\Truncate DIM_QWIKLEADS_CUSTOMER_INFO_TEMP"
+          TopLeft="210,31" />
+        <NodeLayout
+          Size="147,42"
+          Id="Package\Truncate table"
+          TopLeft="485,288.5" />
+        <NodeLayout
+          Size="152,42"
+          Id="Package\UpdateETLDate"
+          TopLeft="484.307692307692,405.576923076923" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="210,52">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-48,44"
+              Start="0,0"
+              End="-40.5,44">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-20,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-20,0"
+                    Point2="-24,0"
+                    Point3="-24,4" />
+                  <mssgle:LineSegment
+                    End="-24,40" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-24,40"
+                    Point2="-24,44"
+                    Point3="-28,44" />
+                  <mssgle:LineSegment
+                    End="-40.5,44" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="91.5,117">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="164.5,43.5"
+              Start="0,0"
+              End="164.5,36">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.75"
+                    Point2="0,21.75"
+                    Point3="4,21.75" />
+                  <mssgle:LineSegment
+                    End="160.5,21.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="160.5,21.75"
+                    Point2="164.5,21.75"
+                    Point3="164.5,25.75" />
+                  <mssgle:LineSegment
+                    End="164.5,36" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="256,202.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="12.5,57"
+              Start="0,0"
+              End="12.5,49.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.5"
+                    Point2="0,28.5"
+                    Point3="4,28.5" />
+                  <mssgle:LineSegment
+                    End="8.5,28.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="8.5,28.5"
+                    Point2="12.5,28.5"
+                    Point3="12.5,32.5" />
+                  <mssgle:LineSegment
+                    End="12.5,49.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="268.5,301.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="363,382.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="121.307692307692,44.076923076923"
+              Start="0,0"
+              End="113.807692307692,44.076923076923">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="56.653846153846,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="56.653846153846,0"
+                    Point2="60.653846153846,0"
+                    Point3="60.653846153846,4" />
+                  <mssgle:LineSegment
+                    End="60.653846153846,40.076923076923" />
+                  <mssgle:CubicBezierSegment
+                    Point1="60.653846153846,40.076923076923"
+                    Point2="60.653846153846,44.076923076923"
+                    Point3="64.653846153846,44.076923076923" />
+                  <mssgle:LineSegment
+                    End="113.807692307692,44.076923076923" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="559.403846153846,405.576923076923">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,-75.076923076923"
+              Start="0,0"
+              End="0,-67.576923076923">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-67.576923076923" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="284,42"
+          Id="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP"
+          TopLeft="130,184" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Data Flow Task\OLE DB Source"
+          TopLeft="60,60" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="135,102">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="137,82"
+              Start="0,0"
+              End="137,74.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,37"
+                    Point2="0,41"
+                    Point3="4,41" />
+                  <mssgle:LineSegment
+                    End="133,41" />
+                  <mssgle:CubicBezierSegment
+                    Point1="133,41"
+                    Point2="137,41"
+                    Point3="137,45" />
+                  <mssgle:LineSegment
+                    End="137,74.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\DIM_QWIKLEADS_CUSTOMER_INFO_TEMP">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">View</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

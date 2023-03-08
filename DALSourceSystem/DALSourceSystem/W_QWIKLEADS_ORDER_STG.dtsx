@@ -1,0 +1,1728 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="12/13/2022 1:18:34 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DC2-DWHS-V-02"
+  DTS:CreatorName="SALE-CO\nalsalem"
+  DTS:DTSID="{67A5AB0F-89C2-4DE6-B97B-90994BBD38BB}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.1601.5"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="W_QWIKLEADS_ORDER_STG"
+  DTS:PackageType="5"
+  DTS:VersionBuild="18"
+  DTS:VersionGUID="{2D8CF194-963A-44CA-A169-0595A004812B}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3B9940A1-5E55-4CBF-816F-6F318E6063A4}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="GET_ETL_DATE">
+      <DTS:VariableValue
+        DTS:DataType="8">2020-01-01 00:00:00:000</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{321A1666-EA45-4A41-955C-7206103961D7}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;&#xA;SELECT * FROM Maydani_Enterprise.dbo.[order]&#xA;where updatedOn &gt;'&quot; + @[User::GET_ETL_DATE] + &quot;'&#xA;&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceQuery">
+      <DTS:VariableValue
+        DTS:DataType="8">
+SELECT * FROM Maydani_Enterprise.dbo.[order]
+where updatedOn &gt;'2020-01-01 00:00:00:000'
+</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Get ETL Date"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{23A390C3-E249-47CD-B45F-E384F74E4339}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get ETL Date"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{649F1921-5B49-4DCF-9547-373918113F06}"
+          SQLTask:SqlStatementSource="exec GetLastETLDate 'W_QWIKLEADS_ORDER_STG'"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::GET_ETL_DATE" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\GetMaxLastUpdateDate"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{7A861B5B-D975-4011-B592-C30C48E83EB9}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="GetMaxLastUpdateDate"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{78779782-C63A-46A8-AFA5-227BB8602DA6}"
+          SQLTask:SqlStatementSource=" SELECT MAX(updatedOn) FROM  &#xA;[W_QWIKLEADS_ORDER_STG]"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::GET_ETL_DATE" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Merge Temp And Staging"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{342FBACE-E42B-4CCE-81E8-C490BF865D58}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Merge Temp And Staging"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{78779782-C63A-46A8-AFA5-227BB8602DA6}"
+          SQLTask:SqlStatementSource="MERGE [W_QWIKLEADS_ORDER_STG] D&#xA;USING [W_QWIKLEADS_ORDER_STG_TEMP] TEM&#xA;ON D.[id]= TEM.[id]&#xA;WHEN NOT MATCHED THEN INSERT&#xA;(  &#xA;[id],&#xA;[orderNo],&#xA;[customerId],&#xA;[status],&#xA;[region],&#xA;[city],&#xA;[createdBy],&#xA;[createdOn],&#xA;[updatedBy],&#xA;[updatedOn],&#xA;[note],&#xA;[discount],&#xA;[rowVersion],&#xA;[productType],&#xA;[vatPercentage],&#xA;[salesOrderStatus],&#xA;[cashReceiptStatus],&#xA;[bankAccountNumber],&#xA;[reference],&#xA;[salesOrderNumber],&#xA;[cashReceiptNumber],&#xA;[salesSupportUser],&#xA;[crmOrderNumber],&#xA;[pickupLocation],&#xA;[pickupCustomerId],&#xA;[pickupStreet],&#xA;[pickupPostalCode],&#xA;[pickupBuildingNumber],&#xA;[isCredit],&#xA;[isCommitted],&#xA;[CommittedDate],&#xA;[isUpgrade],&#xA;[requestType],&#xA;[company]&#xA;    &#xA;)&#xA;VALUES&#xA;(   &#xA;TEM.[id],&#xA;TEM.[orderNo],&#xA;TEM.[customerId],&#xA;TEM.[status],&#xA;TEM.[region],&#xA;TEM.[city],&#xA;TEM.[createdBy],&#xA;TEM.[createdOn],&#xA;TEM.[updatedBy],&#xA;TEM.[updatedOn],&#xA;TEM.[note],&#xA;TEM.[discount],&#xA;TEM.[rowVersion],&#xA;TEM.[productType],&#xA;TEM.[vatPercentage],&#xA;TEM.[salesOrderStatus],&#xA;TEM.[cashReceiptStatus],&#xA;TEM.[bankAccountNumber],&#xA;TEM.[reference],&#xA;TEM.[salesOrderNumber],&#xA;TEM.[cashReceiptNumber],&#xA;TEM.[salesSupportUser],&#xA;TEM.[crmOrderNumber],&#xA;TEM.[pickupLocation],&#xA;TEM.[pickupCustomerId],&#xA;TEM.[pickupStreet],&#xA;TEM.[pickupPostalCode],&#xA;TEM.[pickupBuildingNumber],&#xA;TEM.[isCredit],&#xA;TEM.[isCommitted],&#xA;TEM.[CommittedDate],&#xA;TEM.[isUpgrade],&#xA;TEM.[requestType],&#xA;TEM.[company]&#xA;)&#xA;WHEN MATCHED THEN UPDATE SET&#xA;D.[id]=TEM.[id],&#xA;D.[orderNo]=TEM.[orderNo],&#xA;D.[customerId]=TEM.[customerId],&#xA;D.[status]=TEM.[status],&#xA;D.[region]=TEM.[region],&#xA;D.[city]=TEM.[city],&#xA;D.[createdBy]=TEM.[createdBy],&#xA;D.[createdOn]=TEM.[createdOn],&#xA;D.[updatedBy]=TEM.[updatedBy],&#xA;D.[updatedOn]=TEM.[updatedOn],&#xA;D.[note]=TEM.[note],&#xA;D.[discount]=TEM.[discount],&#xA;D.[rowVersion]=TEM.[rowVersion],&#xA;D.[productType]=TEM.[productType],&#xA;D.[vatPercentage]=TEM.[vatPercentage],&#xA;D.[salesOrderStatus]=TEM.[salesOrderStatus],&#xA;D.[cashReceiptStatus]=TEM.[cashReceiptStatus],&#xA;D.[bankAccountNumber]=TEM.[bankAccountNumber],&#xA;D.[reference]=TEM.[reference],&#xA;D.[salesOrderNumber]=TEM.[salesOrderNumber],&#xA;D.[cashReceiptNumber]=TEM.[cashReceiptNumber],&#xA;D.[salesSupportUser]=TEM.[salesSupportUser],&#xA;D.[crmOrderNumber]=TEM.[crmOrderNumber],&#xA;D.[pickupLocation]=TEM.[pickupLocation],&#xA;D.[pickupCustomerId]=TEM.[pickupCustomerId],&#xA;D.[pickupStreet]=TEM.[pickupStreet],&#xA;D.[pickupPostalCode]=TEM.[pickupPostalCode],&#xA;D.[pickupBuildingNumber]=TEM.[pickupBuildingNumber],&#xA;D.[isCredit]=TEM.[isCredit],&#xA;D.[isCommitted]=TEM.[isCommitted],&#xA;D.[CommittedDate]=TEM.[CommittedDate],&#xA;D.[isUpgrade]=TEM.[isUpgrade],&#xA;D.[requestType]=TEM.[requestType],&#xA;D.[company]=TEM.[company]&#xA;;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SOURCE TO STAGE"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{A6EE40FF-99B1-48A1-B81C-83BB85CE12AF}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SOURCE TO STAGE"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\SOURCE TO STAGE\ORDER SOURCE"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="ORDER SOURCE"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Order]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT * FROM [Maydani_Enterprise].[dbo].[Order]</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\SOURCE TO STAGE\ORDER SOURCE.Connections[OleDbConnection]"
+                  connectionManagerID="{14806523-FEF0-4DC0-8784-9D010EA7D8D5}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Maydani]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[id]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[id]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[id]"
+                      name="id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[orderNo]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[orderNo]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[orderNo]"
+                      name="orderNo"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[customerId]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[customerId]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[customerId]"
+                      name="customerId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[status]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[status]"
+                      length="50"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[status]"
+                      name="status"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[region]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[region]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[region]"
+                      name="region"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[city]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[city]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[city]"
+                      name="city"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[createdBy]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[createdBy]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[createdBy]"
+                      name="createdBy"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[createdOn]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[createdOn]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[createdOn]"
+                      name="createdOn"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[updatedBy]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[updatedBy]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[updatedBy]"
+                      name="updatedBy"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[updatedOn]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[updatedOn]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[updatedOn]"
+                      name="updatedOn"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[note]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[note]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[note]"
+                      name="note"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[discount]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[discount]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[discount]"
+                      name="discount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[rowVersion]"
+                      dataType="bytes"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[rowVersion]"
+                      length="8"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[rowVersion]"
+                      name="rowVersion"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[productType]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[productType]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[productType]"
+                      name="productType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[vatPercentage]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[vatPercentage]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[vatPercentage]"
+                      name="vatPercentage"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[salesOrderStatus]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[salesOrderStatus]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[salesOrderStatus]"
+                      name="salesOrderStatus"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[cashReceiptStatus]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[cashReceiptStatus]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[cashReceiptStatus]"
+                      name="cashReceiptStatus"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[bankAccountNumber]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[bankAccountNumber]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[bankAccountNumber]"
+                      name="bankAccountNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[reference]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[reference]"
+                      length="50"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[reference]"
+                      name="reference"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[salesOrderNumber]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[salesOrderNumber]"
+                      length="50"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[salesOrderNumber]"
+                      name="salesOrderNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[cashReceiptNumber]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[cashReceiptNumber]"
+                      length="50"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[cashReceiptNumber]"
+                      name="cashReceiptNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[salesSupportUser]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[salesSupportUser]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[salesSupportUser]"
+                      name="salesSupportUser"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[crmOrderNumber]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[crmOrderNumber]"
+                      length="50"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[crmOrderNumber]"
+                      name="crmOrderNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[pickupLocation]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[pickupLocation]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[pickupLocation]"
+                      name="pickupLocation"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[pickupCustomerId]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[pickupCustomerId]"
+                      length="100"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[pickupCustomerId]"
+                      name="pickupCustomerId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[pickupStreet]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[pickupStreet]"
+                      length="100"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[pickupStreet]"
+                      name="pickupStreet"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[pickupPostalCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[pickupPostalCode]"
+                      length="100"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[pickupPostalCode]"
+                      name="pickupPostalCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[pickupBuildingNumber]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[pickupBuildingNumber]"
+                      length="100"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[pickupBuildingNumber]"
+                      name="pickupBuildingNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[isCredit]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[isCredit]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[isCredit]"
+                      name="isCredit"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[isCommitted]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[isCommitted]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[isCommitted]"
+                      name="isCommitted"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[CommittedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[CommittedDate]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[CommittedDate]"
+                      name="CommittedDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[isUpgrade]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[isUpgrade]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[isUpgrade]"
+                      name="isUpgrade"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[requestType]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[requestType]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[requestType]"
+                      name="requestType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[company]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[company]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[company]"
+                      name="company"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[id]"
+                      dataType="guid"
+                      name="id" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[orderNo]"
+                      dataType="i8"
+                      name="orderNo" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[customerId]"
+                      dataType="guid"
+                      name="customerId" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[status]"
+                      dataType="wstr"
+                      length="50"
+                      name="status" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[region]"
+                      dataType="guid"
+                      name="region" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[city]"
+                      dataType="guid"
+                      name="city" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[createdBy]"
+                      dataType="guid"
+                      name="createdBy" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[createdOn]"
+                      dataType="dbTimeStamp"
+                      name="createdOn" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[updatedBy]"
+                      dataType="guid"
+                      name="updatedBy" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[updatedOn]"
+                      dataType="dbTimeStamp"
+                      name="updatedOn" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[note]"
+                      dataType="nText"
+                      name="note" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[discount]"
+                      dataType="r8"
+                      name="discount" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[rowVersion]"
+                      dataType="bytes"
+                      length="8"
+                      name="rowVersion" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[productType]"
+                      dataType="guid"
+                      name="productType" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[vatPercentage]"
+                      dataType="r8"
+                      name="vatPercentage" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[salesOrderStatus]"
+                      dataType="bool"
+                      name="salesOrderStatus" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[cashReceiptStatus]"
+                      dataType="bool"
+                      name="cashReceiptStatus" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[bankAccountNumber]"
+                      dataType="guid"
+                      name="bankAccountNumber" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[reference]"
+                      dataType="wstr"
+                      length="50"
+                      name="reference" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[salesOrderNumber]"
+                      dataType="wstr"
+                      length="50"
+                      name="salesOrderNumber" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[cashReceiptNumber]"
+                      dataType="wstr"
+                      length="50"
+                      name="cashReceiptNumber" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[salesSupportUser]"
+                      dataType="guid"
+                      name="salesSupportUser" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[crmOrderNumber]"
+                      dataType="wstr"
+                      length="50"
+                      name="crmOrderNumber" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[pickupLocation]"
+                      dataType="guid"
+                      name="pickupLocation" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[pickupCustomerId]"
+                      dataType="wstr"
+                      length="100"
+                      name="pickupCustomerId" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[pickupStreet]"
+                      dataType="wstr"
+                      length="100"
+                      name="pickupStreet" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[pickupPostalCode]"
+                      dataType="wstr"
+                      length="100"
+                      name="pickupPostalCode" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[pickupBuildingNumber]"
+                      dataType="wstr"
+                      length="100"
+                      name="pickupBuildingNumber" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[isCredit]"
+                      dataType="bool"
+                      name="isCredit" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[isCommitted]"
+                      dataType="bool"
+                      name="isCommitted" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[CommittedDate]"
+                      dataType="dbTimeStamp"
+                      name="CommittedDate" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[isUpgrade]"
+                      dataType="bool"
+                      name="isUpgrade" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[requestType]"
+                      dataType="guid"
+                      name="requestType" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].ExternalColumns[company]"
+                      dataType="guid"
+                      name="company" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[id]"
+                      dataType="guid"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[id]"
+                      name="id" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[orderNo]"
+                      dataType="i8"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[orderNo]"
+                      name="orderNo" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[customerId]"
+                      dataType="guid"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[customerId]"
+                      name="customerId" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[status]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[status]"
+                      name="status" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[region]"
+                      dataType="guid"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[region]"
+                      name="region" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[city]"
+                      dataType="guid"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[city]"
+                      name="city" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[createdBy]"
+                      dataType="guid"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[createdBy]"
+                      name="createdBy" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[createdOn]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[createdOn]"
+                      name="createdOn" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[updatedBy]"
+                      dataType="guid"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[updatedBy]"
+                      name="updatedBy" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[updatedOn]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[updatedOn]"
+                      name="updatedOn" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[note]"
+                      dataType="nText"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[note]"
+                      name="note" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[discount]"
+                      dataType="r8"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[discount]"
+                      name="discount" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[rowVersion]"
+                      dataType="bytes"
+                      length="8"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[rowVersion]"
+                      name="rowVersion" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[productType]"
+                      dataType="guid"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[productType]"
+                      name="productType" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[vatPercentage]"
+                      dataType="r8"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[vatPercentage]"
+                      name="vatPercentage" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[salesOrderStatus]"
+                      dataType="bool"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[salesOrderStatus]"
+                      name="salesOrderStatus" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[cashReceiptStatus]"
+                      dataType="bool"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[cashReceiptStatus]"
+                      name="cashReceiptStatus" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[bankAccountNumber]"
+                      dataType="guid"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[bankAccountNumber]"
+                      name="bankAccountNumber" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[reference]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[reference]"
+                      name="reference" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[salesOrderNumber]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[salesOrderNumber]"
+                      name="salesOrderNumber" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[cashReceiptNumber]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[cashReceiptNumber]"
+                      name="cashReceiptNumber" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[salesSupportUser]"
+                      dataType="guid"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[salesSupportUser]"
+                      name="salesSupportUser" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[crmOrderNumber]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[crmOrderNumber]"
+                      name="crmOrderNumber" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[pickupLocation]"
+                      dataType="guid"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[pickupLocation]"
+                      name="pickupLocation" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[pickupCustomerId]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[pickupCustomerId]"
+                      name="pickupCustomerId" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[pickupStreet]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[pickupStreet]"
+                      name="pickupStreet" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[pickupPostalCode]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[pickupPostalCode]"
+                      name="pickupPostalCode" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[pickupBuildingNumber]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[pickupBuildingNumber]"
+                      name="pickupBuildingNumber" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[isCredit]"
+                      dataType="bool"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[isCredit]"
+                      name="isCredit" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[isCommitted]"
+                      dataType="bool"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[isCommitted]"
+                      name="isCommitted" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[CommittedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[CommittedDate]"
+                      name="CommittedDate" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[isUpgrade]"
+                      dataType="bool"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[isUpgrade]"
+                      name="isUpgrade" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[requestType]"
+                      dataType="guid"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[requestType]"
+                      name="requestType" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[company]"
+                      dataType="guid"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[company]"
+                      name="company" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="W_QWIKLEADS_ORDER_STG_TEMP"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[W_QWIKLEADS_ORDER_STG_TEMP]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Connections[OleDbConnection]"
+                  connectionManagerID="{78779782-C63A-46A8-AFA5-227BB8602DA6}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].Columns[id]"
+                      cachedDataType="guid"
+                      cachedName="id"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[id]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[id]" />
+                    <inputColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].Columns[orderNo]"
+                      cachedDataType="i8"
+                      cachedName="orderNo"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[orderNo]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[orderNo]" />
+                    <inputColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].Columns[customerId]"
+                      cachedDataType="guid"
+                      cachedName="customerId"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[customerId]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[customerId]" />
+                    <inputColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].Columns[status]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="status"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[status]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[status]" />
+                    <inputColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].Columns[region]"
+                      cachedDataType="guid"
+                      cachedName="region"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[region]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[region]" />
+                    <inputColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].Columns[city]"
+                      cachedDataType="guid"
+                      cachedName="city"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[city]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[city]" />
+                    <inputColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].Columns[createdBy]"
+                      cachedDataType="guid"
+                      cachedName="createdBy"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[createdBy]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[createdBy]" />
+                    <inputColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].Columns[createdOn]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="createdOn"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[createdOn]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[createdOn]" />
+                    <inputColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].Columns[updatedBy]"
+                      cachedDataType="guid"
+                      cachedName="updatedBy"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[updatedBy]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[updatedBy]" />
+                    <inputColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].Columns[updatedOn]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="updatedOn"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[updatedOn]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[updatedOn]" />
+                    <inputColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].Columns[note]"
+                      cachedDataType="nText"
+                      cachedName="note"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[note]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[note]" />
+                    <inputColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].Columns[discount]"
+                      cachedDataType="r8"
+                      cachedName="discount"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[discount]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[discount]" />
+                    <inputColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].Columns[rowVersion]"
+                      cachedDataType="bytes"
+                      cachedLength="8"
+                      cachedName="rowVersion"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[rowVersion]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[rowVersion]" />
+                    <inputColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].Columns[productType]"
+                      cachedDataType="guid"
+                      cachedName="productType"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[productType]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[productType]" />
+                    <inputColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].Columns[vatPercentage]"
+                      cachedDataType="r8"
+                      cachedName="vatPercentage"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[vatPercentage]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[vatPercentage]" />
+                    <inputColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].Columns[salesOrderStatus]"
+                      cachedDataType="bool"
+                      cachedName="salesOrderStatus"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[salesOrderStatus]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[salesOrderStatus]" />
+                    <inputColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].Columns[cashReceiptStatus]"
+                      cachedDataType="bool"
+                      cachedName="cashReceiptStatus"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[cashReceiptStatus]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[cashReceiptStatus]" />
+                    <inputColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].Columns[bankAccountNumber]"
+                      cachedDataType="guid"
+                      cachedName="bankAccountNumber"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[bankAccountNumber]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[bankAccountNumber]" />
+                    <inputColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].Columns[reference]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="reference"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[reference]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[reference]" />
+                    <inputColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].Columns[salesOrderNumber]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="salesOrderNumber"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[salesOrderNumber]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[salesOrderNumber]" />
+                    <inputColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].Columns[cashReceiptNumber]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="cashReceiptNumber"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[cashReceiptNumber]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[cashReceiptNumber]" />
+                    <inputColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].Columns[salesSupportUser]"
+                      cachedDataType="guid"
+                      cachedName="salesSupportUser"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[salesSupportUser]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[salesSupportUser]" />
+                    <inputColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].Columns[crmOrderNumber]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="crmOrderNumber"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[crmOrderNumber]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[crmOrderNumber]" />
+                    <inputColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].Columns[pickupLocation]"
+                      cachedDataType="guid"
+                      cachedName="pickupLocation"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[pickupLocation]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[pickupLocation]" />
+                    <inputColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].Columns[pickupCustomerId]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="pickupCustomerId"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[pickupCustomerId]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[pickupCustomerId]" />
+                    <inputColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].Columns[pickupStreet]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="pickupStreet"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[pickupStreet]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[pickupStreet]" />
+                    <inputColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].Columns[pickupPostalCode]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="pickupPostalCode"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[pickupPostalCode]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[pickupPostalCode]" />
+                    <inputColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].Columns[pickupBuildingNumber]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="pickupBuildingNumber"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[pickupBuildingNumber]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[pickupBuildingNumber]" />
+                    <inputColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].Columns[isCredit]"
+                      cachedDataType="bool"
+                      cachedName="isCredit"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[isCredit]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[isCredit]" />
+                    <inputColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].Columns[isCommitted]"
+                      cachedDataType="bool"
+                      cachedName="isCommitted"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[isCommitted]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[isCommitted]" />
+                    <inputColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].Columns[CommittedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="CommittedDate"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[CommittedDate]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[CommittedDate]" />
+                    <inputColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].Columns[isUpgrade]"
+                      cachedDataType="bool"
+                      cachedName="isUpgrade"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[isUpgrade]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[isUpgrade]" />
+                    <inputColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].Columns[requestType]"
+                      cachedDataType="guid"
+                      cachedName="requestType"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[requestType]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[requestType]" />
+                    <inputColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].Columns[company]"
+                      cachedDataType="guid"
+                      cachedName="company"
+                      externalMetadataColumnId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[company]"
+                      lineageId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output].Columns[company]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[id]"
+                      dataType="guid"
+                      name="id" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[orderNo]"
+                      dataType="i8"
+                      name="orderNo" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[customerId]"
+                      dataType="guid"
+                      name="customerId" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[status]"
+                      dataType="wstr"
+                      length="50"
+                      name="status" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[region]"
+                      dataType="guid"
+                      name="region" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[city]"
+                      dataType="guid"
+                      name="city" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[createdBy]"
+                      dataType="guid"
+                      name="createdBy" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[createdOn]"
+                      dataType="dbTimeStamp"
+                      name="createdOn" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[updatedBy]"
+                      dataType="guid"
+                      name="updatedBy" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[updatedOn]"
+                      dataType="dbTimeStamp"
+                      name="updatedOn" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[note]"
+                      dataType="nText"
+                      name="note" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[discount]"
+                      dataType="r8"
+                      name="discount" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[rowVersion]"
+                      dataType="bytes"
+                      length="8"
+                      name="rowVersion" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[productType]"
+                      dataType="guid"
+                      name="productType" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[vatPercentage]"
+                      dataType="r8"
+                      name="vatPercentage" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[salesOrderStatus]"
+                      dataType="bool"
+                      name="salesOrderStatus" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[cashReceiptStatus]"
+                      dataType="bool"
+                      name="cashReceiptStatus" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[bankAccountNumber]"
+                      dataType="guid"
+                      name="bankAccountNumber" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[reference]"
+                      dataType="wstr"
+                      length="50"
+                      name="reference" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[salesOrderNumber]"
+                      dataType="wstr"
+                      length="50"
+                      name="salesOrderNumber" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[cashReceiptNumber]"
+                      dataType="wstr"
+                      length="50"
+                      name="cashReceiptNumber" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[salesSupportUser]"
+                      dataType="guid"
+                      name="salesSupportUser" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[crmOrderNumber]"
+                      dataType="wstr"
+                      length="50"
+                      name="crmOrderNumber" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[pickupLocation]"
+                      dataType="guid"
+                      name="pickupLocation" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[pickupCustomerId]"
+                      dataType="wstr"
+                      length="100"
+                      name="pickupCustomerId" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[pickupStreet]"
+                      dataType="wstr"
+                      length="100"
+                      name="pickupStreet" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[pickupPostalCode]"
+                      dataType="wstr"
+                      length="100"
+                      name="pickupPostalCode" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[pickupBuildingNumber]"
+                      dataType="wstr"
+                      length="100"
+                      name="pickupBuildingNumber" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[isCredit]"
+                      dataType="bool"
+                      name="isCredit" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[isCommitted]"
+                      dataType="bool"
+                      name="isCommitted" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[CommittedDate]"
+                      dataType="dbTimeStamp"
+                      name="CommittedDate" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[isUpgrade]"
+                      dataType="bool"
+                      name="isUpgrade" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[requestType]"
+                      dataType="guid"
+                      name="requestType" />
+                    <externalMetadataColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[company]"
+                      dataType="guid"
+                      name="company" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\SOURCE TO STAGE.Paths[OLE DB Source Output]"
+              endId="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\SOURCE TO STAGE\ORDER SOURCE.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate table W_QWIKLEADS_ORDER_STG_TEMP"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{81B7BB7D-ECB1-4226-B09F-DFBB5A2B99DB}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate table W_QWIKLEADS_ORDER_STG_TEMP"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{78779782-C63A-46A8-AFA5-227BB8602DA6}"
+          SQLTask:SqlStatementSource="truncate table W_QWIKLEADS_ORDER_STG_TEMP" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate W_QWIKLEADS_ORDER_STG_TEMP"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{F7AAA254-9B29-4FAD-B747-8C68AFA49886}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate W_QWIKLEADS_ORDER_STG_TEMP"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{78779782-C63A-46A8-AFA5-227BB8602DA6}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE W_QWIKLEADS_ORDER_STG_TEMP" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\UpdateETLDate"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{21FA0A72-06A1-4179-9DEB-4878EE8481C5}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="UpdateETLDate"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{649F1921-5B49-4DCF-9547-373918113F06}"
+          SQLTask:SqlStatementSource="EXEC UpdatePackageETLDate 'W_QWIKLEADS_ORDER_STG',?"
+          SQLTask:TypeConversionMode="None" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::GET_ETL_DATE"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{62F80EB9-6DAB-4833-A2D0-3C99F1452D19}"
+      DTS:From="Package\Truncate W_QWIKLEADS_ORDER_STG_TEMP"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Get ETL Date" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{77F13094-E7BF-4003-A1BF-A595D526A94D}"
+      DTS:From="Package\Get ETL Date"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\SOURCE TO STAGE" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{90C6541A-E47C-4408-A4A5-ED736DD76E8E}"
+      DTS:From="Package\SOURCE TO STAGE"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Merge Temp And Staging" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{3971CD62-C39A-4592-9F2E-6F084DD938D1}"
+      DTS:From="Package\Merge Temp And Staging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\GetMaxLastUpdateDate" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{AA6CC936-CAD6-42F9-AF3C-E99D7A3B6561}"
+      DTS:From="Package\GetMaxLastUpdateDate"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\UpdateETLDate" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{5C7A26B6-08DC-45D2-85CC-5C05E296BA7C}"
+      DTS:From="Package\UpdateETLDate"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Truncate table W_QWIKLEADS_ORDER_STG_TEMP" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="141,42"
+          Id="Package\Get ETL Date"
+          TopLeft="86,53" />
+        <NodeLayout
+          Size="189,42"
+          Id="Package\GetMaxLastUpdateDate"
+          TopLeft="253,348" />
+        <NodeLayout
+          Size="198,42"
+          Id="Package\Merge Temp And Staging"
+          TopLeft="227,247" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\SOURCE TO STAGE"
+          TopLeft="133.5,144.5" />
+        <NodeLayout
+          Size="321,42"
+          Id="Package\Truncate table W_QWIKLEADS_ORDER_STG_TEMP"
+          TopLeft="634,324" />
+        <NodeLayout
+          Size="295,42"
+          Id="Package\Truncate W_QWIKLEADS_ORDER_STG_TEMP"
+          TopLeft="261,55" />
+        <NodeLayout
+          Size="152,42"
+          Id="Package\UpdateETLDate"
+          TopLeft="726.307692307692,415.076923076923" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="261,75">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-34,0"
+              Start="0,0"
+              End="-26.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-26.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="156.5,95">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="62.5,49.5"
+              Start="0,0"
+              End="62.5,42">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.75"
+                    Point2="0,24.75"
+                    Point3="4,24.75" />
+                  <mssgle:LineSegment
+                    End="58.5,24.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="58.5,24.75"
+                    Point2="62.5,24.75"
+                    Point3="62.5,28.75" />
+                  <mssgle:LineSegment
+                    End="62.5,42" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="219,186.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="107,60.5"
+              Start="0,0"
+              End="107,53">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26.25"
+                    Point2="0,30.25"
+                    Point3="4,30.25" />
+                  <mssgle:LineSegment
+                    End="103,30.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="103,30.25"
+                    Point2="107,30.25"
+                    Point3="107,34.25" />
+                  <mssgle:LineSegment
+                    End="107,53" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="326,289">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="21.5,59"
+              Start="0,0"
+              End="21.5,51.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,25.5"
+                    Point2="0,29.5"
+                    Point3="4,29.5" />
+                  <mssgle:LineSegment
+                    End="17.5,29.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="17.5,29.5"
+                    Point2="21.5,29.5"
+                    Point3="21.5,33.5" />
+                  <mssgle:LineSegment
+                    End="21.5,51.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="347.5,390">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="386.807692307692,25.076923076923"
+              Start="0,0"
+              End="386.807692307692,17.576923076923">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,10.889423076923" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,10.889423076923"
+                    Point2="0,14.889423076923"
+                    Point3="4,14.889423076923" />
+                  <mssgle:LineSegment
+                    End="382.807692307692,14.889423076923" />
+                  <mssgle:CubicBezierSegment
+                    Point1="382.807692307692,14.889423076923"
+                    Point2="386.807692307692,14.889423076923"
+                    Point3="386.807692307692,18.889423076923" />
+                  <mssgle:LineSegment
+                    End="386.807692307692,17.576923076923" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="798.403846153846,415.076923076923">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,-49.0769230769231"
+              Start="0,0"
+              End="0,-41.5769230769231">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-41.5769230769231" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\SOURCE TO STAGE">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="156,42"
+          Id="Package\SOURCE TO STAGE\ORDER SOURCE"
+          TopLeft="60,60" />
+        <NodeLayout
+          Size="250,42"
+          Id="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP"
+          TopLeft="245,209" />
+        <EdgeLayout
+          Id="Package\SOURCE TO STAGE.Paths[OLE DB Source Output]"
+          TopLeft="138,102">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="232,107"
+              Start="0,0"
+              End="232,99.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,49.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,49.5"
+                    Point2="0,53.5"
+                    Point3="4,53.5" />
+                  <mssgle:LineSegment
+                    End="228,53.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="228,53.5"
+                    Point2="232,53.5"
+                    Point3="232,57.5" />
+                  <mssgle:LineSegment
+                    End="232,99.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\SOURCE TO STAGE\ORDER SOURCE">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\SOURCE TO STAGE\W_QWIKLEADS_ORDER_STG_TEMP">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

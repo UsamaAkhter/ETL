@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="DalSourceSystem"
+  DTS:DTSID="{03E0A564-6C13-4F39-9D9D-D7FD71B716DD}"
+  DTS:CreationName="ODBC">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="uid=power_bi;Dsn=DALConnection;">
+      <DTS:Password
+        DTS:Name="pwd"
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA6W4pMcY3MEK5oBD2YCOU7AAAAAACAAAAAAADZgAAwAAAABAAAABja1+WAWdK+CCmc31lhVSqAAAAAASAAACgAAAAEAAAAGjI+EBDFZrnMwbUw6q0rMGAAAAAEH2MYmah5IgQ7WBHa3CNCRpMBYIBzQqBp4bXY1t5V96aO5Jldyz3n1pO5JKnhTmKAYhuQ5stil2auNodfr5tPLZ3stO5KQE9NiofIR4I6EXUKM6uSc/Obk0lCy21K/kr0sK1FgL3286//p91W/IHIGKVNPpRaBoZBMktTrpawqUUAAAA/pQKyfiIZtjG20j/qib1KR7Bpz8=</DTS:Password>
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

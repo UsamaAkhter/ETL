@@ -1,0 +1,1581 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="12/13/2022 4:38:51 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DC2-DWHS-V-02"
+  DTS:CreatorName="SALE-CO\raldaham"
+  DTS:DTSID="{5F57BCFA-CFB1-405B-A59C-359003781EF8}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.1601.5"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="DAL_SHIPMENT_REPORT_STG"
+  DTS:PackageType="5"
+  DTS:VersionBuild="10"
+  DTS:VersionGUID="{021EA26E-AE0C-4B78-A399-C7B75ACD52D1}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DAL_SHIPMENT_REPORT_STG"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{7F19BC95-26FC-44A2-A03A-31969A2556CA}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DAL_SHIPMENT_REPORT_STG"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DAL_SHIPMENT_REPORT_STG"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DAL_SHIPMENT_REPORT_STG]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Connections[OleDbConnection]"
+                  connectionManagerID="{78779782-C63A-46A8-AFA5-227BB8602DA6}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[id]"
+                      cachedDataType="i4"
+                      cachedName="id"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[id]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[id]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[shipment_id]"
+                      cachedDataType="i4"
+                      cachedName="shipment_id"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[shipment_id]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[shipment_id]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[bill_reference_no]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="bill_reference_no"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[bill_reference_no]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[bill_reference_no]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[organization_name]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="organization_name"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[organization_name]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[organization_name]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[sender_name]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="sender_name"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[sender_name]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[sender_name]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[journey_type]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="journey_type"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[journey_type]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[journey_type]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[status]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="status"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[status]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[status]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[zone]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="zone"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[zone]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[zone]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[city]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="city"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[city]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[city]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[lmd_code]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="lmd_code"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[lmd_code]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[lmd_code]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[created_at]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="created_at"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[created_at]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[created_at]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[new_at]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="new_at"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[new_at]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[new_at]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[assigned_at]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="assigned_at"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[assigned_at]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[assigned_at]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[confirmed_at]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="confirmed_at"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[confirmed_at]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[confirmed_at]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[dispatched_at]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="dispatched_at"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[dispatched_at]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[dispatched_at]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[delivered_at]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="delivered_at"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[delivered_at]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[delivered_at]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[onhold_at]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="onhold_at"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[onhold_at]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[onhold_at]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[updated_at]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="updated_at"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[updated_at]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[updated_at]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[cancelled_at]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="cancelled_at"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[cancelled_at]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[cancelled_at]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[cancellation_reason]"
+                      cachedDataType="nText"
+                      cachedName="cancellation_reason"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[cancellation_reason]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[cancellation_reason]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[last_note]"
+                      cachedDataType="nText"
+                      cachedName="last_note"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[last_note]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[last_note]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[preferred_pickup_time]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="preferred_pickup_time"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[preferred_pickup_time]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[preferred_pickup_time]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[preferred_delivery_time]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="preferred_delivery_time"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[preferred_delivery_time]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[preferred_delivery_time]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[receiver_name]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="receiver_name"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[receiver_name]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[receiver_name]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[receiver_mobile]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="receiver_mobile"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[receiver_mobile]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[receiver_mobile]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[agent_national_id]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="agent_national_id"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[agent_national_id]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[agent_national_id]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[agent_name]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="agent_name"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[agent_name]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[agent_name]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[agent_mobile]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="agent_mobile"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[agent_mobile]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[agent_mobile]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[total_duration]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="total_duration"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[total_duration]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[total_duration]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[duration]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="duration"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[duration]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[duration]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[distance]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="distance"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[distance]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[distance]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[commission]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="commission"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[commission]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[commission]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[amount]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="amount"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[amount]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[amount]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[collect_amount]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="collect_amount"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[collect_amount]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[collect_amount]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[delivery_coordinates]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="delivery_coordinates"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[delivery_coordinates]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[delivery_coordinates]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[pick_up_coordinates]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="pick_up_coordinates"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[pick_up_coordinates]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[pick_up_coordinates]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[agent_coordinates]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="agent_coordinates"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[agent_coordinates]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[agent_coordinates]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[is_in_batch]"
+                      cachedDataType="i4"
+                      cachedName="is_in_batch"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[is_in_batch]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[is_in_batch]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[batch_ref_number]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="batch_ref_number"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[batch_ref_number]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[batch_ref_number]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[Urgency]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Urgency"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[Urgency]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[Urgency]" />
+                    <inputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].Columns[sms_count]"
+                      cachedDataType="i4"
+                      cachedName="sms_count"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[sms_count]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[sms_count]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[id]"
+                      dataType="i4"
+                      name="id" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[shipment_id]"
+                      dataType="i4"
+                      name="shipment_id" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[bill_reference_no]"
+                      dataType="wstr"
+                      length="255"
+                      name="bill_reference_no" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[organization_name]"
+                      dataType="wstr"
+                      length="255"
+                      name="organization_name" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[sender_name]"
+                      dataType="wstr"
+                      length="255"
+                      name="sender_name" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[journey_type]"
+                      dataType="wstr"
+                      length="255"
+                      name="journey_type" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[status]"
+                      dataType="wstr"
+                      length="255"
+                      name="status" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[zone]"
+                      dataType="wstr"
+                      length="100"
+                      name="zone" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[city]"
+                      dataType="wstr"
+                      length="255"
+                      name="city" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[lmd_code]"
+                      dataType="wstr"
+                      length="255"
+                      name="lmd_code" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[created_at]"
+                      dataType="dbTimeStamp"
+                      name="created_at" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[new_at]"
+                      dataType="dbTimeStamp"
+                      name="new_at" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[assigned_at]"
+                      dataType="dbTimeStamp"
+                      name="assigned_at" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[confirmed_at]"
+                      dataType="dbTimeStamp"
+                      name="confirmed_at" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[dispatched_at]"
+                      dataType="dbTimeStamp"
+                      name="dispatched_at" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[delivered_at]"
+                      dataType="dbTimeStamp"
+                      name="delivered_at" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[onhold_at]"
+                      dataType="dbTimeStamp"
+                      name="onhold_at" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[updated_at]"
+                      dataType="dbTimeStamp"
+                      name="updated_at" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[cancelled_at]"
+                      dataType="dbTimeStamp"
+                      name="cancelled_at" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[cancellation_reason]"
+                      dataType="nText"
+                      name="cancellation_reason" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[last_note]"
+                      dataType="nText"
+                      name="last_note" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[preferred_pickup_time]"
+                      dataType="dbTimeStamp"
+                      name="preferred_pickup_time" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[preferred_delivery_time]"
+                      dataType="dbTimeStamp"
+                      name="preferred_delivery_time" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[receiver_name]"
+                      dataType="wstr"
+                      length="255"
+                      name="receiver_name" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[receiver_mobile]"
+                      dataType="wstr"
+                      length="255"
+                      name="receiver_mobile" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[agent_national_id]"
+                      dataType="wstr"
+                      length="100"
+                      name="agent_national_id" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[agent_name]"
+                      dataType="wstr"
+                      length="100"
+                      name="agent_name" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[agent_mobile]"
+                      dataType="wstr"
+                      length="255"
+                      name="agent_mobile" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[total_duration]"
+                      dataType="wstr"
+                      length="255"
+                      name="total_duration" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[duration]"
+                      dataType="wstr"
+                      length="255"
+                      name="duration" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[distance]"
+                      dataType="wstr"
+                      length="255"
+                      name="distance" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[commission]"
+                      dataType="wstr"
+                      length="255"
+                      name="commission" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[amount]"
+                      dataType="wstr"
+                      length="255"
+                      name="amount" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[collect_amount]"
+                      dataType="wstr"
+                      length="255"
+                      name="collect_amount" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[delivery_coordinates]"
+                      dataType="wstr"
+                      length="255"
+                      name="delivery_coordinates" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[pick_up_coordinates]"
+                      dataType="wstr"
+                      length="255"
+                      name="pick_up_coordinates" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[agent_coordinates]"
+                      dataType="wstr"
+                      length="255"
+                      name="agent_coordinates" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[is_in_batch]"
+                      dataType="i4"
+                      name="is_in_batch" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[batch_ref_number]"
+                      dataType="wstr"
+                      length="255"
+                      name="batch_ref_number" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[Urgency]"
+                      dataType="wstr"
+                      length="50"
+                      name="Urgency" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input].ExternalColumns[sms_count]"
+                      dataType="i4"
+                      name="sms_count" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report"
+              componentClassID="Attunity.SSISODBCSrc"
+              contactInfo="ODBC Source;Connector for Open Database Connectivity (ODBC) by Attunity; Attunity Ltd.; All Rights Reserved; http://www.attunity.com;6"
+              description="ODBC Source"
+              name="shipment_report"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="The name of the table to be fetched."
+                  expressionType="Notify"
+                  name="TableName"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand">SELECT * FROM dal.shipment_report</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the number of rows fetched per batch."
+                  expressionType="Notify"
+                  name="BatchSize">1000</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines the chunk size allocation for LOB columns"
+                  expressionType="Notify"
+                  name="LobChunkSize">32768</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines how the component exposes CHAR columns. If False, CHAR columns are exposed as (multi-)byte strings (DT_STR), if True, CHAR columns are exposed as wide strings (DT_WSTR)"
+                  expressionType="Notify"
+                  name="ExposeCharColumnsAsUnicode">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds to wait for an SQL statement to execute before returning to the application."
+                  expressionType="Notify"
+                  name="StatementTimeout">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The code page to use when code page information is unavailable from the data source."
+                  expressionType="Notify"
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Int32"
+                  description="The mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="The method used for fetching data."
+                  expressionType="Notify"
+                  name="FetchMethod"
+                  typeConverter="FetchMethod">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="The ODBC C data type for binding numeric data."
+                  expressionType="Notify"
+                  name="BindNumericAs"
+                  typeConverter="BindNumericAs">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines how the component would bind columns of (multi)-byte string types (i.e., SQL_CHAR, SQL_VARCHAR, SQL_LONGVARCHAR). The options are: Unicode (SQL_C_WCHAR) and ANSI (SQL_C_CHAR)."
+                  expressionType="Notify"
+                  name="BindCharColumnsAs"
+                  typeConverter="BindCharColumnsAs">0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Connections[ODBCConnection]"
+                  connectionManagerID="{03E0A564-6C13-4F39-9D9D-D7FD71B716DD}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DalSourceSystem]"
+                  description="The ODBC runtime connection"
+                  name="ODBCConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output]"
+                  errorRowDisposition="FailComponent"
+                  name="ODBC Source Output"
+                  truncationRowDisposition="FailComponent">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[id]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[id]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[id]"
+                      name="id" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[shipment_id]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[shipment_id]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[shipment_id]"
+                      name="shipment_id" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[bill_reference_no]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[bill_reference_no]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[bill_reference_no]"
+                      name="bill_reference_no" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[organization_name]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[organization_name]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[organization_name]"
+                      name="organization_name" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[sender_name]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[sender_name]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[sender_name]"
+                      name="sender_name" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[journey_type]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[journey_type]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[journey_type]"
+                      name="journey_type" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[status]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[status]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[status]"
+                      name="status" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[zone]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[zone]"
+                      length="100"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[zone]"
+                      name="zone" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[city]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[city]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[city]"
+                      name="city" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[lmd_code]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[lmd_code]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[lmd_code]"
+                      name="lmd_code" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[created_at]"
+                      dataType="dbTimeStamp"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[created_at]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[created_at]"
+                      name="created_at" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[new_at]"
+                      dataType="dbTimeStamp"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[new_at]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[new_at]"
+                      name="new_at" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[assigned_at]"
+                      dataType="dbTimeStamp"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[assigned_at]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[assigned_at]"
+                      name="assigned_at" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[confirmed_at]"
+                      dataType="dbTimeStamp"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[confirmed_at]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[confirmed_at]"
+                      name="confirmed_at" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[dispatched_at]"
+                      dataType="dbTimeStamp"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[dispatched_at]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[dispatched_at]"
+                      name="dispatched_at" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[delivered_at]"
+                      dataType="dbTimeStamp"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[delivered_at]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[delivered_at]"
+                      name="delivered_at" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[onhold_at]"
+                      dataType="dbTimeStamp"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[onhold_at]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[onhold_at]"
+                      name="onhold_at" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[updated_at]"
+                      dataType="dbTimeStamp"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[updated_at]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[updated_at]"
+                      name="updated_at" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[cancelled_at]"
+                      dataType="dbTimeStamp"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[cancelled_at]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[cancelled_at]"
+                      name="cancelled_at" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[cancellation_reason]"
+                      dataType="nText"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[cancellation_reason]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[cancellation_reason]"
+                      name="cancellation_reason" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[last_note]"
+                      dataType="nText"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[last_note]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[last_note]"
+                      name="last_note" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[preferred_pickup_time]"
+                      dataType="dbTimeStamp"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[preferred_pickup_time]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[preferred_pickup_time]"
+                      name="preferred_pickup_time" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[preferred_delivery_time]"
+                      dataType="dbTimeStamp"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[preferred_delivery_time]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[preferred_delivery_time]"
+                      name="preferred_delivery_time" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[receiver_name]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[receiver_name]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[receiver_name]"
+                      name="receiver_name" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[receiver_mobile]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[receiver_mobile]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[receiver_mobile]"
+                      name="receiver_mobile" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[agent_national_id]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[agent_national_id]"
+                      length="100"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[agent_national_id]"
+                      name="agent_national_id" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[agent_name]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[agent_name]"
+                      length="100"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[agent_name]"
+                      name="agent_name" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[agent_mobile]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[agent_mobile]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[agent_mobile]"
+                      name="agent_mobile" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[total_duration]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[total_duration]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[total_duration]"
+                      name="total_duration" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[duration]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[duration]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[duration]"
+                      name="duration" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[distance]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[distance]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[distance]"
+                      name="distance" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[commission]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[commission]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[commission]"
+                      name="commission" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[amount]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[amount]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[amount]"
+                      name="amount" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[collect_amount]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[collect_amount]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[collect_amount]"
+                      name="collect_amount" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[delivery_coordinates]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[delivery_coordinates]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[delivery_coordinates]"
+                      name="delivery_coordinates" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[pick_up_coordinates]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[pick_up_coordinates]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[pick_up_coordinates]"
+                      name="pick_up_coordinates" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[agent_coordinates]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[agent_coordinates]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[agent_coordinates]"
+                      name="agent_coordinates" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[is_in_batch]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[is_in_batch]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[is_in_batch]"
+                      name="is_in_batch" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[batch_ref_number]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[batch_ref_number]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[batch_ref_number]"
+                      name="batch_ref_number" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[Urgency]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[Urgency]"
+                      length="50"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[Urgency]"
+                      name="Urgency" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[sms_count]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[sms_count]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].Columns[sms_count]"
+                      name="sms_count" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[id]"
+                      dataType="i4"
+                      name="id" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[shipment_id]"
+                      dataType="i4"
+                      name="shipment_id" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[bill_reference_no]"
+                      dataType="wstr"
+                      length="255"
+                      name="bill_reference_no" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[organization_name]"
+                      dataType="wstr"
+                      length="255"
+                      name="organization_name" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[sender_name]"
+                      dataType="wstr"
+                      length="255"
+                      name="sender_name" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[journey_type]"
+                      dataType="wstr"
+                      length="255"
+                      name="journey_type" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[status]"
+                      dataType="wstr"
+                      length="255"
+                      name="status" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[zone]"
+                      dataType="wstr"
+                      length="100"
+                      name="zone" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[city]"
+                      dataType="wstr"
+                      length="255"
+                      name="city" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[lmd_code]"
+                      dataType="wstr"
+                      length="255"
+                      name="lmd_code" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[created_at]"
+                      dataType="dbTimeStamp"
+                      name="created_at" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[new_at]"
+                      dataType="dbTimeStamp"
+                      name="new_at" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[assigned_at]"
+                      dataType="dbTimeStamp"
+                      name="assigned_at" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[confirmed_at]"
+                      dataType="dbTimeStamp"
+                      name="confirmed_at" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[dispatched_at]"
+                      dataType="dbTimeStamp"
+                      name="dispatched_at" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[delivered_at]"
+                      dataType="dbTimeStamp"
+                      name="delivered_at" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[onhold_at]"
+                      dataType="dbTimeStamp"
+                      name="onhold_at" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[updated_at]"
+                      dataType="dbTimeStamp"
+                      name="updated_at" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[cancelled_at]"
+                      dataType="dbTimeStamp"
+                      name="cancelled_at" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[cancellation_reason]"
+                      dataType="nText"
+                      name="cancellation_reason" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[last_note]"
+                      dataType="nText"
+                      name="last_note" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[preferred_pickup_time]"
+                      dataType="dbTimeStamp"
+                      name="preferred_pickup_time" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[preferred_delivery_time]"
+                      dataType="dbTimeStamp"
+                      name="preferred_delivery_time" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[receiver_name]"
+                      dataType="wstr"
+                      length="255"
+                      name="receiver_name" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[receiver_mobile]"
+                      dataType="wstr"
+                      length="255"
+                      name="receiver_mobile" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[agent_national_id]"
+                      dataType="wstr"
+                      length="100"
+                      name="agent_national_id" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[agent_name]"
+                      dataType="wstr"
+                      length="100"
+                      name="agent_name" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[agent_mobile]"
+                      dataType="wstr"
+                      length="255"
+                      name="agent_mobile" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[total_duration]"
+                      dataType="wstr"
+                      length="255"
+                      name="total_duration" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[duration]"
+                      dataType="wstr"
+                      length="255"
+                      name="duration" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[distance]"
+                      dataType="wstr"
+                      length="255"
+                      name="distance" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[commission]"
+                      dataType="wstr"
+                      length="255"
+                      name="commission" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[amount]"
+                      dataType="wstr"
+                      length="255"
+                      name="amount" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[collect_amount]"
+                      dataType="wstr"
+                      length="255"
+                      name="collect_amount" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[delivery_coordinates]"
+                      dataType="wstr"
+                      length="255"
+                      name="delivery_coordinates" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[pick_up_coordinates]"
+                      dataType="wstr"
+                      length="255"
+                      name="pick_up_coordinates" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[agent_coordinates]"
+                      dataType="wstr"
+                      length="255"
+                      name="agent_coordinates" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[is_in_batch]"
+                      dataType="i4"
+                      name="is_in_batch" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[batch_ref_number]"
+                      dataType="wstr"
+                      length="255"
+                      name="batch_ref_number" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[Urgency]"
+                      dataType="wstr"
+                      length="50"
+                      name="Urgency" />
+                    <externalMetadataColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[sms_count]"
+                      dataType="i4"
+                      name="sms_count" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output]"
+                  isErrorOut="true"
+                  name="ODBC Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[id]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[id]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[id]"
+                      name="id" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[shipment_id]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[shipment_id]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[shipment_id]"
+                      name="shipment_id" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[bill_reference_no]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[bill_reference_no]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[bill_reference_no]"
+                      name="bill_reference_no" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[organization_name]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[organization_name]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[organization_name]"
+                      name="organization_name" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[sender_name]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[sender_name]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[sender_name]"
+                      name="sender_name" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[journey_type]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[journey_type]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[journey_type]"
+                      name="journey_type" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[status]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[status]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[status]"
+                      name="status" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[zone]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[zone]"
+                      length="100"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[zone]"
+                      name="zone" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[city]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[city]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[city]"
+                      name="city" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[lmd_code]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[lmd_code]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[lmd_code]"
+                      name="lmd_code" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[created_at]"
+                      dataType="dbTimeStamp"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[created_at]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[created_at]"
+                      name="created_at" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[new_at]"
+                      dataType="dbTimeStamp"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[new_at]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[new_at]"
+                      name="new_at" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[assigned_at]"
+                      dataType="dbTimeStamp"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[assigned_at]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[assigned_at]"
+                      name="assigned_at" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[confirmed_at]"
+                      dataType="dbTimeStamp"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[confirmed_at]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[confirmed_at]"
+                      name="confirmed_at" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[dispatched_at]"
+                      dataType="dbTimeStamp"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[dispatched_at]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[dispatched_at]"
+                      name="dispatched_at" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[delivered_at]"
+                      dataType="dbTimeStamp"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[delivered_at]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[delivered_at]"
+                      name="delivered_at" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[onhold_at]"
+                      dataType="dbTimeStamp"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[onhold_at]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[onhold_at]"
+                      name="onhold_at" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[updated_at]"
+                      dataType="dbTimeStamp"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[updated_at]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[updated_at]"
+                      name="updated_at" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[cancelled_at]"
+                      dataType="dbTimeStamp"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[cancelled_at]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[cancelled_at]"
+                      name="cancelled_at" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[cancellation_reason]"
+                      dataType="nText"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[cancellation_reason]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[cancellation_reason]"
+                      name="cancellation_reason" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[last_note]"
+                      dataType="nText"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[last_note]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[last_note]"
+                      name="last_note" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[preferred_pickup_time]"
+                      dataType="dbTimeStamp"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[preferred_pickup_time]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[preferred_pickup_time]"
+                      name="preferred_pickup_time" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[preferred_delivery_time]"
+                      dataType="dbTimeStamp"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[preferred_delivery_time]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[preferred_delivery_time]"
+                      name="preferred_delivery_time" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[receiver_name]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[receiver_name]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[receiver_name]"
+                      name="receiver_name" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[receiver_mobile]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[receiver_mobile]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[receiver_mobile]"
+                      name="receiver_mobile" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[agent_national_id]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[agent_national_id]"
+                      length="100"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[agent_national_id]"
+                      name="agent_national_id" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[agent_name]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[agent_name]"
+                      length="100"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[agent_name]"
+                      name="agent_name" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[agent_mobile]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[agent_mobile]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[agent_mobile]"
+                      name="agent_mobile" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[total_duration]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[total_duration]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[total_duration]"
+                      name="total_duration" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[duration]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[duration]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[duration]"
+                      name="duration" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[distance]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[distance]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[distance]"
+                      name="distance" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[commission]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[commission]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[commission]"
+                      name="commission" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[amount]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[amount]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[amount]"
+                      name="amount" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[collect_amount]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[collect_amount]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[collect_amount]"
+                      name="collect_amount" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[delivery_coordinates]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[delivery_coordinates]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[delivery_coordinates]"
+                      name="delivery_coordinates" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[pick_up_coordinates]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[pick_up_coordinates]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[pick_up_coordinates]"
+                      name="pick_up_coordinates" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[agent_coordinates]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[agent_coordinates]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[agent_coordinates]"
+                      name="agent_coordinates" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[is_in_batch]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[is_in_batch]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[is_in_batch]"
+                      name="is_in_batch" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[batch_ref_number]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[batch_ref_number]"
+                      length="255"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[batch_ref_number]"
+                      name="batch_ref_number" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[Urgency]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[Urgency]"
+                      length="50"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[Urgency]"
+                      name="Urgency" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[sms_count]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output].ExternalColumns[sms_count]"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[sms_count]"
+                      name="sms_count" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DAL_SHIPMENT_REPORT_STG.Paths[ODBC Source Output]"
+              endId="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG.Inputs[OLE DB Destination Input]"
+              name="ODBC Source Output"
+              startId="Package\DAL_SHIPMENT_REPORT_STG\shipment_report.Outputs[ODBC Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate DAL_SHIPMENT_REPORT_STG"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{54169E02-457D-47F3-9D49-408C89DC30F8}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate DAL_SHIPMENT_REPORT_STG"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{78779782-C63A-46A8-AFA5-227BB8602DA6}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE [DAL_SHIPMENT_REPORT_STG]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{3D60BFE2-EE35-433B-81D8-51784FA18CDD}"
+      DTS:From="Package\Truncate DAL_SHIPMENT_REPORT_STG"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\DAL_SHIPMENT_REPORT_STG" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="224,42"
+          Id="Package\DAL_SHIPMENT_REPORT_STG"
+          TopLeft="335,140" />
+        <NodeLayout
+          Size="269,42"
+          Id="Package\Truncate DAL_SHIPMENT_REPORT_STG"
+          TopLeft="320,50" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="450.75,92">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,48"
+              Start="0,0"
+              End="0,40.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,40.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DAL_SHIPMENT_REPORT_STG">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="157,42"
+          Id="Package\DAL_SHIPMENT_REPORT_STG\shipment_report"
+          TopLeft="413,90" />
+        <NodeLayout
+          Size="224,42"
+          Id="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG"
+          TopLeft="404,172" />
+        <EdgeLayout
+          Id="Package\DAL_SHIPMENT_REPORT_STG.Paths[ODBC Source Output]"
+          TopLeft="491.5,132">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="24.5,40"
+              Start="0,0"
+              End="24.5,32.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16"
+                    Point2="0,20"
+                    Point3="4,20" />
+                  <mssgle:LineSegment
+                    End="20.5,20" />
+                  <mssgle:CubicBezierSegment
+                    Point1="20.5,20"
+                    Point2="24.5,20"
+                    Point3="24.5,24" />
+                  <mssgle:LineSegment
+                    End="24.5,32.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DAL_SHIPMENT_REPORT_STG\DAL_SHIPMENT_REPORT_STG">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,648 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="12/22/2022 3:36:57 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DC2-DWHS-V-02"
+  DTS:CreatorName="SALE-CO\uakhter.c"
+  DTS:DTSID="{C39EBE22-5774-47FC-BDB4-23AB3A9D5EDF}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.1601.5"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="MASTERQWIKLEADS"
+  DTS:PackageType="5"
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{2EC3C8AF-F9EF-49C2-9939-BAFEB46DAE4D}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\MasterQwikFactAndDimension"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{630BF71C-A0E1-4008-9963-2B322D108B46}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="MasterQwikFactAndDimension">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\MasterQwikFactAndDimension\DIM_QWIKLEADS_COMPANY_INFO"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="DIM_QWIKLEADS_COMPANY_INFO"
+          DTS:DTSID="{D5C3E895-6B5B-4E3E-A504-0DAC22FCDBE4}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="DIM_QWIKLEADS_COMPANY_INFO"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>DIM_QWIKLEADS_COMPANY_INFO.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\MasterQwikFactAndDimension\DIM_QWIKLEADS_CUSTOMER_INFO"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="DIM_QWIKLEADS_CUSTOMER_INFO"
+          DTS:DTSID="{3FAA1B12-939C-4563-9748-29742FC02488}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="DIM_QWIKLEADS_CUSTOMER_INFO"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>DIM_QWIKLEADS_CUSTOMER_INFO.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\MasterQwikFactAndDimension\DIM_QWIKLEADS_PRODUCT"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="DIM_QWIKLEADS_PRODUCT"
+          DTS:DTSID="{F2D90E53-B16A-48B3-A020-2A25BDA8E602}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="DIM_QWIKLEADS_PRODUCT"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>DIM_QWIKLEADS_PRODUCT.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\MasterQwikFactAndDimension\DIM_QWIKLEADS_REGION"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="DIM_QWIKLEADS_REGION"
+          DTS:DTSID="{1D9556B7-CADF-4420-B024-9EF3FEB461F2}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="DIM_QWIKLEADS_REGION"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>DIM_QWIKLEADS_REGION.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\MasterQwikFactAndDimension\FACT_QWIKLEADS_ORDER"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="FACT_QWIKLEADS_ORDER"
+          DTS:DTSID="{DB184346-FD0A-4FF4-A627-88D964BB1683}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="FACT_QWIKLEADS_ORDER"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>FACT_QWIKLEADS_ORDER.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\MasterQwikFactAndDimension.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{5AEF9271-86DD-4796-879E-CB6B8CD1B089}"
+          DTS:From="Package\MasterQwikFactAndDimension\DIM_QWIKLEADS_COMPANY_INFO"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\MasterQwikFactAndDimension\DIM_QWIKLEADS_CUSTOMER_INFO" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\MasterQwikFactAndDimension.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{A902662B-AF19-4134-AFC7-3845C1637C36}"
+          DTS:From="Package\MasterQwikFactAndDimension\DIM_QWIKLEADS_CUSTOMER_INFO"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\MasterQwikFactAndDimension\DIM_QWIKLEADS_PRODUCT" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\MasterQwikFactAndDimension.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{0C19063F-C60A-44D0-9826-88F7E0BCFC6C}"
+          DTS:From="Package\MasterQwikFactAndDimension\DIM_QWIKLEADS_PRODUCT"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\MasterQwikFactAndDimension\DIM_QWIKLEADS_REGION" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\MasterQwikFactAndDimension.PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{EFEE353F-9A8E-43FF-9EA5-7205954569F1}"
+          DTS:From="Package\MasterQwikFactAndDimension\DIM_QWIKLEADS_REGION"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\MasterQwikFactAndDimension\FACT_QWIKLEADS_ORDER" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\MasterQwikLeadsBaseTbles"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{C924E71D-E5EF-4E7F-8EE4-5E92EE12D83C}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="MasterQwikLeadsBaseTbles">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\MasterQwikLeadsBaseTbles\W_QWIKLEADS_CUSTOMER_PROFILE_STG"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="W_QWIKLEADS_CUSTOMER_PROFILE_STG"
+          DTS:DTSID="{3526FA8B-44DF-4A38-B66C-BB81CC4EBE24}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="W_QWIKLEADS_CUSTOMER_PROFILE_STG"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>W_QWIKLEADS_CUSTOMER_PROFILE_STG.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\MasterQwikLeadsBaseTbles\W_QWIKLEADS_LIST_STG"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="W_QWIKLEADS_LIST_STG"
+          DTS:DTSID="{1A83709E-64D3-4F6F-A1A7-68E0F17E6BAC}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="W_QWIKLEADS_LIST_STG"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>W_QWIKLEADS_LIST_STG.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\MasterQwikLeadsBaseTbles\W_QWIKLEADS_ORDER_PRODUCT_STG"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="W_QWIKLEADS_ORDER_PRODUCT_STG"
+          DTS:DTSID="{5863E926-5BFB-40C8-89C3-34F071F9EBB9}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="W_QWIKLEADS_ORDER_PRODUCT_STG"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>W_QWIKLEADS_ORDER_PRODUCT_STG.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\MasterQwikLeadsBaseTbles\W_QWIKLEADS_ORDER_STG"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="W_QWIKLEADS_ORDER_STG"
+          DTS:DTSID="{5A3013E8-E78B-4EC8-A379-BF137EE62427}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="W_QWIKLEADS_ORDER_STG"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>W_QWIKLEADS_ORDER_STG.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\MasterQwikLeadsBaseTbles\W_QWIKLEADS_PRODUCT_STG"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="W_QWIKLEADS_PRODUCT_STG"
+          DTS:DTSID="{597CBD25-7E9A-4D19-9B5D-D58D4D4A3563}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="W_QWIKLEADS_PRODUCT_STG"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>W_QWIKLEADS_PRODUCT_STG.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\MasterQwikLeadsBaseTbles\W_QWIKLEADS_REGION_STG"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="W_QWIKLEADS_REGION_STG"
+          DTS:DTSID="{59A0411A-B6BD-4443-A3A9-6FC3B31E68B7}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="W_QWIKLEADS_REGION_STG"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>W_QWIKLEADS_REGION_STG.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\MasterQwikLeadsBaseTbles.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{78707028-376C-4517-8190-FB2AD7E3380B}"
+          DTS:From="Package\MasterQwikLeadsBaseTbles\W_QWIKLEADS_CUSTOMER_PROFILE_STG"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\MasterQwikLeadsBaseTbles\W_QWIKLEADS_LIST_STG" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\MasterQwikLeadsBaseTbles.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{9881E299-664C-4B6B-A337-8D2E8E118909}"
+          DTS:From="Package\MasterQwikLeadsBaseTbles\W_QWIKLEADS_LIST_STG"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\MasterQwikLeadsBaseTbles\W_QWIKLEADS_ORDER_PRODUCT_STG" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\MasterQwikLeadsBaseTbles.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{4B09017D-CCE2-4D64-B344-B206270DB4A7}"
+          DTS:From="Package\MasterQwikLeadsBaseTbles\W_QWIKLEADS_ORDER_PRODUCT_STG"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\MasterQwikLeadsBaseTbles\W_QWIKLEADS_ORDER_STG" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\MasterQwikLeadsBaseTbles.PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{1E0DBDF8-70A2-4E12-8C67-A7744029DD06}"
+          DTS:From="Package\MasterQwikLeadsBaseTbles\W_QWIKLEADS_ORDER_STG"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\MasterQwikLeadsBaseTbles\W_QWIKLEADS_PRODUCT_STG" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\MasterQwikLeadsBaseTbles.PrecedenceConstraints[Constraint 4]"
+          DTS:CreationName=""
+          DTS:DTSID="{A9FE0F6C-14DE-4F89-A749-D98333F2C2ED}"
+          DTS:From="Package\MasterQwikLeadsBaseTbles\W_QWIKLEADS_PRODUCT_STG"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 4"
+          DTS:To="Package\MasterQwikLeadsBaseTbles\W_QWIKLEADS_REGION_STG" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{2232A608-8B84-4437-8242-C19FD280D3ED}"
+      DTS:From="Package\MasterQwikLeadsBaseTbles"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\MasterQwikFactAndDimension" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="183,42"
+          Id="Package\MasterQwikLeadsBaseTbles\W_QWIKLEADS_CUSTOMER_PROFILE_STG"
+          TopLeft="10,9" />
+        <NodeLayout
+          Size="192,42"
+          Id="Package\MasterQwikLeadsBaseTbles\W_QWIKLEADS_ORDER_PRODUCT_STG"
+          TopLeft="485,5" />
+        <NodeLayout
+          Size="192,42"
+          Id="Package\MasterQwikLeadsBaseTbles\W_QWIKLEADS_REGION_STG"
+          TopLeft="466,75" />
+        <NodeLayout
+          Size="192,42"
+          Id="Package\MasterQwikLeadsBaseTbles\W_QWIKLEADS_LIST_STG"
+          TopLeft="246,6" />
+        <NodeLayout
+          Size="192,42"
+          Id="Package\MasterQwikLeadsBaseTbles\W_QWIKLEADS_ORDER_STG"
+          TopLeft="716,10" />
+        <NodeLayout
+          Size="192,42"
+          Id="Package\MasterQwikLeadsBaseTbles\W_QWIKLEADS_PRODUCT_STG"
+          TopLeft="706,80" />
+        <EdgeLayout
+          Id="Package\MasterQwikLeadsBaseTbles.PrecedenceConstraints[Constraint]"
+          TopLeft="193,28.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="53,0"
+              Start="0,0"
+              End="45.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="45.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\MasterQwikLeadsBaseTbles.PrecedenceConstraints[Constraint 1]"
+          TopLeft="438,26.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="47,0"
+              Start="0,0"
+              End="39.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="39.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\MasterQwikLeadsBaseTbles.PrecedenceConstraints[Constraint 2]"
+          TopLeft="677,28.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="39,0"
+              Start="0,0"
+              End="31.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="31.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\MasterQwikLeadsBaseTbles.PrecedenceConstraints[Constraint 3]"
+          TopLeft="812,52">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-10,28"
+              Start="0,0"
+              End="-10,20.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,10" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,10"
+                    Point2="0,14"
+                    Point3="-4,14" />
+                  <mssgle:LineSegment
+                    End="-6,14" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-6,14"
+                    Point2="-10,14"
+                    Point3="-10,18" />
+                  <mssgle:LineSegment
+                    End="-10,20.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\MasterQwikLeadsBaseTbles.PrecedenceConstraints[Constraint 4]"
+          TopLeft="706,98.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-48,0"
+              Start="0,0"
+              End="-40.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-40.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="1048,257"
+          Size="1048,300"
+          Id="Package\MasterQwikLeadsBaseTbles"
+          TopLeft="5.5,5.5" />
+        <NodeLayout
+          Size="183,42"
+          Id="Package\MasterQwikFactAndDimension\DIM_QWIKLEADS_COMPANY_INFO"
+          TopLeft="19,28" />
+        <NodeLayout
+          Size="252,42"
+          Id="Package\MasterQwikFactAndDimension\DIM_QWIKLEADS_CUSTOMER_INFO"
+          TopLeft="239,28" />
+        <NodeLayout
+          Size="215,42"
+          Id="Package\MasterQwikFactAndDimension\DIM_QWIKLEADS_PRODUCT"
+          TopLeft="521,29" />
+        <NodeLayout
+          Size="207,42"
+          Id="Package\MasterQwikFactAndDimension\DIM_QWIKLEADS_REGION"
+          TopLeft="779,26" />
+        <EdgeLayout
+          Id="Package\MasterQwikFactAndDimension.PrecedenceConstraints[Constraint]"
+          TopLeft="202,49">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="37,0"
+              Start="0,0"
+              End="29.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="29.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\MasterQwikFactAndDimension.PrecedenceConstraints[Constraint 1]"
+          TopLeft="491,49.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="30,0"
+              Start="0,0"
+              End="22.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="22.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\MasterQwikFactAndDimension.PrecedenceConstraints[Constraint 2]"
+          TopLeft="736,48.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="43,0"
+              Start="0,0"
+              End="35.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="35.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="208,42"
+          Id="Package\MasterQwikFactAndDimension\FACT_QWIKLEADS_ORDER"
+          TopLeft="809,102" />
+        <EdgeLayout
+          Id="Package\MasterQwikFactAndDimension.PrecedenceConstraints[Constraint 3]"
+          TopLeft="882.5,68">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="18,34"
+              Start="0,0"
+              End="18,26.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13"
+                    Point2="0,17"
+                    Point3="4,17" />
+                  <mssgle:LineSegment
+                    End="14,17" />
+                  <mssgle:CubicBezierSegment
+                    Point1="14,17"
+                    Point2="18,17"
+                    Point3="18,21" />
+                  <mssgle:LineSegment
+                    End="18,26.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="1126,199"
+          Size="1126,242"
+          Id="Package\MasterQwikFactAndDimension"
+          TopLeft="7,350" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="529.5,305.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="40.5,44.5"
+              Start="0,0"
+              End="40.5,37">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18.25"
+                    Point2="0,22.25"
+                    Point3="4,22.25" />
+                  <mssgle:LineSegment
+                    End="36.5,22.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="36.5,22.25"
+                    Point2="40.5,22.25"
+                    Point3="40.5,26.25" />
+                  <mssgle:LineSegment
+                    End="40.5,37" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

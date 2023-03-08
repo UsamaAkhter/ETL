@@ -1,0 +1,1288 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="12/9/2022 1:42:18 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DC2-DWHS-V-02"
+  DTS:CreatorName="SALE-CO\nalsalem"
+  DTS:DTSID="{9069F2B2-ECF8-4025-A285-B5ACA25C13DF}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.1601.5"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="W_QWIKLEADS_PRODUCT_STG"
+  DTS:PackageType="5"
+  DTS:VersionBuild="22"
+  DTS:VersionGUID="{480FB235-B851-4DA2-8A58-EBEC1EE5A992}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{AA04035F-7D1F-4B9C-834D-8BFC2C1F88A7}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="GET_ETL_DATE">
+      <DTS:VariableValue
+        DTS:DataType="8">2021-01-01 00:00:00:000</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B3EA0946-B6B1-47B1-B876-35DB06A21570}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;&#xA;SELECT * FROM [Maydani_Shared].[dbo].[Product] &#xA;where updatedOn &gt;'&quot; + @[User::GET_ETL_DATE]  + &quot;'&#xA;&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceQuery">
+      <DTS:VariableValue
+        DTS:DataType="8">
+SELECT * FROM [Maydani_Shared].[dbo].[Product] 
+where updatedOn &gt;'2021-01-01 00:00:00:000'
+</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\FROM SOURCE TO STAGING"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{56485B7C-26E5-4F24-AD90-1B2F72D4B5B0}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="FROM SOURCE TO STAGING"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="PRODUCT SOURCE"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Product]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT * FROM Maydani_Shared.dbo.Product</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Connections[OleDbConnection]"
+                  connectionManagerID="{14806523-FEF0-4DC0-8784-9D010EA7D8D5}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Maydani]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[id]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].ExternalColumns[id]"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[id]"
+                      name="id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[isActive]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].ExternalColumns[isActive]"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[isActive]"
+                      name="isActive"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                      length="300"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[name]"
+                      name="name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[type]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].ExternalColumns[type]"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[type]"
+                      name="type"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[price]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].ExternalColumns[price]"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[price]"
+                      name="price"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[code]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].ExternalColumns[code]"
+                      length="50"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[code]"
+                      name="code"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[createdBy]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].ExternalColumns[createdBy]"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[createdBy]"
+                      name="createdBy"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[createdOn]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].ExternalColumns[createdOn]"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[createdOn]"
+                      name="createdOn"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[updatedBy]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].ExternalColumns[updatedBy]"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[updatedBy]"
+                      name="updatedBy"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[updatedOn]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].ExternalColumns[updatedOn]"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[updatedOn]"
+                      name="updatedOn"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[category]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].ExternalColumns[category]"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[category]"
+                      name="category"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[itemId]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].ExternalColumns[itemId]"
+                      length="50"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[itemId]"
+                      name="itemId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[serialFlag]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].ExternalColumns[serialFlag]"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[serialFlag]"
+                      name="serialFlag"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[isInventory]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].ExternalColumns[isInventory]"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[isInventory]"
+                      name="isInventory"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[productManager]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].ExternalColumns[productManager]"
+                      length="250"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[productManager]"
+                      name="productManager"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[vendor]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].ExternalColumns[vendor]"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[vendor]"
+                      name="vendor"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[grossPrice]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].ExternalColumns[grossPrice]"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[grossPrice]"
+                      name="grossPrice"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[taxCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].ExternalColumns[taxCode]"
+                      length="50"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[taxCode]"
+                      name="taxCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[taxRate]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].ExternalColumns[taxRate]"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[taxRate]"
+                      name="taxRate"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].ExternalColumns[id]"
+                      dataType="guid"
+                      name="id" />
+                    <externalMetadataColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].ExternalColumns[isActive]"
+                      dataType="bool"
+                      name="isActive" />
+                    <externalMetadataColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                      dataType="wstr"
+                      length="300"
+                      name="name" />
+                    <externalMetadataColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].ExternalColumns[type]"
+                      dataType="guid"
+                      name="type" />
+                    <externalMetadataColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].ExternalColumns[price]"
+                      dataType="r8"
+                      name="price" />
+                    <externalMetadataColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].ExternalColumns[code]"
+                      dataType="wstr"
+                      length="50"
+                      name="code" />
+                    <externalMetadataColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].ExternalColumns[createdBy]"
+                      dataType="guid"
+                      name="createdBy" />
+                    <externalMetadataColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].ExternalColumns[createdOn]"
+                      dataType="dbTimeStamp"
+                      name="createdOn" />
+                    <externalMetadataColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].ExternalColumns[updatedBy]"
+                      dataType="guid"
+                      name="updatedBy" />
+                    <externalMetadataColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].ExternalColumns[updatedOn]"
+                      dataType="dbTimeStamp"
+                      name="updatedOn" />
+                    <externalMetadataColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].ExternalColumns[category]"
+                      dataType="guid"
+                      name="category" />
+                    <externalMetadataColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].ExternalColumns[itemId]"
+                      dataType="wstr"
+                      length="50"
+                      name="itemId" />
+                    <externalMetadataColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].ExternalColumns[serialFlag]"
+                      dataType="bool"
+                      name="serialFlag" />
+                    <externalMetadataColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].ExternalColumns[isInventory]"
+                      dataType="bool"
+                      name="isInventory" />
+                    <externalMetadataColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].ExternalColumns[productManager]"
+                      dataType="wstr"
+                      length="250"
+                      name="productManager" />
+                    <externalMetadataColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].ExternalColumns[vendor]"
+                      dataType="guid"
+                      name="vendor" />
+                    <externalMetadataColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].ExternalColumns[grossPrice]"
+                      dataType="r8"
+                      name="grossPrice" />
+                    <externalMetadataColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].ExternalColumns[taxCode]"
+                      dataType="wstr"
+                      length="50"
+                      name="taxCode" />
+                    <externalMetadataColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].ExternalColumns[taxRate]"
+                      dataType="i4"
+                      name="taxRate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[id]"
+                      dataType="guid"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[id]"
+                      name="id" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[isActive]"
+                      dataType="bool"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[isActive]"
+                      name="isActive" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[name]"
+                      dataType="wstr"
+                      length="300"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[name]"
+                      name="name" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[type]"
+                      dataType="guid"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[type]"
+                      name="type" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[price]"
+                      dataType="r8"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[price]"
+                      name="price" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[code]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[code]"
+                      name="code" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[createdBy]"
+                      dataType="guid"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[createdBy]"
+                      name="createdBy" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[createdOn]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[createdOn]"
+                      name="createdOn" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[updatedBy]"
+                      dataType="guid"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[updatedBy]"
+                      name="updatedBy" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[updatedOn]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[updatedOn]"
+                      name="updatedOn" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[category]"
+                      dataType="guid"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[category]"
+                      name="category" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[itemId]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[itemId]"
+                      name="itemId" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[serialFlag]"
+                      dataType="bool"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[serialFlag]"
+                      name="serialFlag" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[isInventory]"
+                      dataType="bool"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[isInventory]"
+                      name="isInventory" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[productManager]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[productManager]"
+                      name="productManager" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[vendor]"
+                      dataType="guid"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[vendor]"
+                      name="vendor" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[grossPrice]"
+                      dataType="r8"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[grossPrice]"
+                      name="grossPrice" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[taxCode]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[taxCode]"
+                      name="taxCode" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[taxRate]"
+                      dataType="i4"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[taxRate]"
+                      name="taxRate" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="W_QWIKLEADS_PRODUCT_STG_TEMP"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[W_QWIKLEADS_PRODUCT_STG_TEMP]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Connections[OleDbConnection]"
+                  connectionManagerID="{78779782-C63A-46A8-AFA5-227BB8602DA6}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].Columns[id]"
+                      cachedDataType="guid"
+                      cachedName="id"
+                      externalMetadataColumnId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[id]"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[id]" />
+                    <inputColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].Columns[isActive]"
+                      cachedDataType="bool"
+                      cachedName="isActive"
+                      externalMetadataColumnId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[isActive]"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[isActive]" />
+                    <inputColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].Columns[name]"
+                      cachedDataType="wstr"
+                      cachedLength="300"
+                      cachedName="name"
+                      externalMetadataColumnId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[name]"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[name]" />
+                    <inputColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].Columns[type]"
+                      cachedDataType="guid"
+                      cachedName="type"
+                      externalMetadataColumnId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[type]"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[type]" />
+                    <inputColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].Columns[price]"
+                      cachedDataType="r8"
+                      cachedName="price"
+                      externalMetadataColumnId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[price]"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[price]" />
+                    <inputColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].Columns[code]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="code"
+                      externalMetadataColumnId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[code]"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[code]" />
+                    <inputColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].Columns[createdBy]"
+                      cachedDataType="guid"
+                      cachedName="createdBy"
+                      externalMetadataColumnId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[createdBy]"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[createdBy]" />
+                    <inputColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].Columns[createdOn]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="createdOn"
+                      externalMetadataColumnId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[createdOn]"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[createdOn]" />
+                    <inputColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].Columns[updatedBy]"
+                      cachedDataType="guid"
+                      cachedName="updatedBy"
+                      externalMetadataColumnId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[updatedBy]"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[updatedBy]" />
+                    <inputColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].Columns[updatedOn]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="updatedOn"
+                      externalMetadataColumnId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[updatedOn]"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[updatedOn]" />
+                    <inputColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].Columns[category]"
+                      cachedDataType="guid"
+                      cachedName="category"
+                      externalMetadataColumnId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[category]"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[category]" />
+                    <inputColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].Columns[itemId]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="itemId"
+                      externalMetadataColumnId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[itemId]"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[itemId]" />
+                    <inputColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].Columns[serialFlag]"
+                      cachedDataType="bool"
+                      cachedName="serialFlag"
+                      externalMetadataColumnId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[serialFlag]"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[serialFlag]" />
+                    <inputColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].Columns[isInventory]"
+                      cachedDataType="bool"
+                      cachedName="isInventory"
+                      externalMetadataColumnId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[isInventory]"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[isInventory]" />
+                    <inputColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].Columns[productManager]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="productManager"
+                      externalMetadataColumnId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[productManager]"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[productManager]" />
+                    <inputColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].Columns[vendor]"
+                      cachedDataType="guid"
+                      cachedName="vendor"
+                      externalMetadataColumnId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[vendor]"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[vendor]" />
+                    <inputColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].Columns[grossPrice]"
+                      cachedDataType="r8"
+                      cachedName="grossPrice"
+                      externalMetadataColumnId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[grossPrice]"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[grossPrice]" />
+                    <inputColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].Columns[taxCode]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="taxCode"
+                      externalMetadataColumnId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[taxCode]"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[taxCode]" />
+                    <inputColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].Columns[taxRate]"
+                      cachedDataType="i4"
+                      cachedName="taxRate"
+                      externalMetadataColumnId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[taxRate]"
+                      lineageId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output].Columns[taxRate]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[id]"
+                      dataType="guid"
+                      name="id" />
+                    <externalMetadataColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[isActive]"
+                      dataType="bool"
+                      name="isActive" />
+                    <externalMetadataColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[name]"
+                      dataType="wstr"
+                      length="300"
+                      name="name" />
+                    <externalMetadataColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[type]"
+                      dataType="guid"
+                      name="type" />
+                    <externalMetadataColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[price]"
+                      dataType="r8"
+                      name="price" />
+                    <externalMetadataColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[code]"
+                      dataType="wstr"
+                      length="50"
+                      name="code" />
+                    <externalMetadataColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[createdBy]"
+                      dataType="guid"
+                      name="createdBy" />
+                    <externalMetadataColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[createdOn]"
+                      dataType="dbTimeStamp"
+                      name="createdOn" />
+                    <externalMetadataColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[updatedBy]"
+                      dataType="guid"
+                      name="updatedBy" />
+                    <externalMetadataColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[updatedOn]"
+                      dataType="dbTimeStamp"
+                      name="updatedOn" />
+                    <externalMetadataColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[category]"
+                      dataType="guid"
+                      name="category" />
+                    <externalMetadataColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[itemId]"
+                      dataType="wstr"
+                      length="50"
+                      name="itemId" />
+                    <externalMetadataColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[serialFlag]"
+                      dataType="bool"
+                      name="serialFlag" />
+                    <externalMetadataColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[isInventory]"
+                      dataType="bool"
+                      name="isInventory" />
+                    <externalMetadataColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[productManager]"
+                      dataType="wstr"
+                      length="250"
+                      name="productManager" />
+                    <externalMetadataColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[vendor]"
+                      dataType="guid"
+                      name="vendor" />
+                    <externalMetadataColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[grossPrice]"
+                      dataType="r8"
+                      name="grossPrice" />
+                    <externalMetadataColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[taxCode]"
+                      dataType="wstr"
+                      length="50"
+                      name="taxCode" />
+                    <externalMetadataColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input].ExternalColumns[taxRate]"
+                      dataType="i4"
+                      name="taxRate" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\FROM SOURCE TO STAGING.Paths[OLE DB Source Output]"
+              endId="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get ETL Date"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{B8A4673F-8A29-4CCE-8F87-95854DFD18DD}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get ETL Date"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{649F1921-5B49-4DCF-9547-373918113F06}"
+          SQLTask:SqlStatementSource="exec GetLastETLDate 'W_QWIKLEADS_ORDER_STG'"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::GET_ETL_DATE" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\GetMaxLastUpdateDate"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{C39FD5EE-FC99-458F-997E-C5A52EF1E109}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="GetMaxLastUpdateDate"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{78779782-C63A-46A8-AFA5-227BB8602DA6}"
+          SQLTask:SqlStatementSource=" SELECT MAX(updatedOn) FROM  &#xA;[W_QWIKLEADS_PRODUCT_STG]"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::GET_ETL_DATE" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Merge Temp And Staging"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{241E924E-79BF-477F-872D-13972DE9E80D}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Merge Temp And Staging"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{78779782-C63A-46A8-AFA5-227BB8602DA6}"
+          SQLTask:SqlStatementSource="MERGE [W_QWIKLEADS_PRODUCT_STG] D&#xA;USING [W_QWIKLEADS_PRODUCT_STG_TEMP] TEM&#xA;ON D.[id]= TEM.[id]&#xA;WHEN NOT MATCHED THEN INSERT&#xA;(  &#xA;[id],&#xA;[isActive],&#xA;[name],&#xA;[type],&#xA;[price],&#xA;[code],&#xA;[createdBy],&#xA;[createdOn],&#xA;[updatedBy],&#xA;[updatedOn],&#xA;[category],&#xA;[itemId],&#xA;[serialFlag],&#xA;[isInventory],&#xA;[productManager],&#xA;[vendor],&#xA;[grossPrice],&#xA;[taxCode],&#xA;[taxRate]&#xA;    &#xA;)&#xA;VALUES&#xA;(   &#xA;TEM.[id],&#xA;TEM.[isActive],&#xA;TEM.[name]&#xA;      ,TEM.[type]&#xA;      ,TEM.[price]&#xA;      ,TEM.[code]&#xA;      ,TEM.[createdBy]&#xA;      ,TEM.[createdOn]&#xA;      ,TEM.[updatedBy]&#xA;      ,TEM.[updatedOn]&#xA;      ,TEM.[category]&#xA;      ,TEM.[itemId]&#xA;      ,TEM.[serialFlag]&#xA;      ,TEM.[isInventory]&#xA;      ,TEM.[productManager]&#xA;      ,TEM.[vendor]&#xA;      ,TEM.[grossPrice]&#xA;      ,TEM.[taxCode]&#xA;      ,TEM.[taxRate]&#xA;)&#xA;WHEN MATCHED THEN UPDATE SET&#xA;D.[id]=TEM.[id],&#xA;D.[isActive]=TEM.[isActive],&#xA;D.[name]=TEM.[name],&#xA;D.[type]=TEM.[type],&#xA;D.[price]=TEM.[price],&#xA;D.[code]=TEM.[code],&#xA;D.[createdBy]=TEM.[createdBy],&#xA;D.[createdOn]=TEM.[createdOn],&#xA;D.[updatedBy]=TEM.[updatedBy],&#xA;D.[updatedOn]=TEM.[updatedOn],&#xA;D.[category]=TEM.[category],&#xA;D.[itemId]=TEM.[itemId],&#xA;D.[serialFlag]=TEM.[serialFlag],&#xA;D.[isInventory]=TEM.[isInventory],&#xA;D.[productManager]=TEM.[productManager],&#xA;D.[vendor]=TEM.[vendor],&#xA;D.[grossPrice]=TEM.[grossPrice],&#xA;D.[taxCode]=TEM.[taxCode],&#xA;D.[taxRate]=TEM.[taxRate]&#xA;;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate table W_QWIKLEADS_PRODUCT_STG_TEMP"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{E40975C1-3715-4D3F-982B-D08B6A420DA0}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate table W_QWIKLEADS_PRODUCT_STG_TEMP"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{78779782-C63A-46A8-AFA5-227BB8602DA6}"
+          SQLTask:SqlStatementSource="truncate table W_QWIKLEADS_PRODUCT_STG_TEMP" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate W_QWIKLEADS_PRODUCT_STG_TEMP"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{E2C8C44A-76B2-4465-84AC-CF6EDAEDB98D}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate W_QWIKLEADS_PRODUCT_STG_TEMP"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{78779782-C63A-46A8-AFA5-227BB8602DA6}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE W_QWIKLEADS_PRODUCT_STG_TEMP" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\UpdateETLDate"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{ABF6C416-B4BE-4D5D-9570-1646136ECBBC}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="UpdateETLDate"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{649F1921-5B49-4DCF-9547-373918113F06}"
+          SQLTask:SqlStatementSource="EXEC UpdatePackageETLDate 'W_QWIKLEADS_PRODUCT_STG',?"
+          SQLTask:TypeConversionMode="None" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::GET_ETL_DATE"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{A6B26587-CAEE-4E2F-A616-EE7FE8AA100E}"
+      DTS:From="Package\Truncate W_QWIKLEADS_PRODUCT_STG_TEMP"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Get ETL Date" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{936D523D-BFA8-4655-B5C7-B263E6DC336A}"
+      DTS:From="Package\Get ETL Date"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\FROM SOURCE TO STAGING" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{E85F6624-7BF2-4518-8D80-97A6A7E2229D}"
+      DTS:From="Package\FROM SOURCE TO STAGING"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Merge Temp And Staging" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{64EC8A37-2FBB-4C7C-8794-0481F9C86993}"
+      DTS:From="Package\Merge Temp And Staging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\GetMaxLastUpdateDate" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{43978E80-D0E4-499F-B276-9F7C3810BF8E}"
+      DTS:From="Package\GetMaxLastUpdateDate"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\UpdateETLDate" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{2C30CC07-9158-47F3-92FA-3F71581AB65C}"
+      DTS:From="Package\UpdateETLDate"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Truncate table W_QWIKLEADS_PRODUCT_STG_TEMP" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="214,42"
+          Id="Package\FROM SOURCE TO STAGING"
+          TopLeft="55,208" />
+        <NodeLayout
+          Size="141,42"
+          Id="Package\Get ETL Date"
+          TopLeft="87,127" />
+        <NodeLayout
+          Size="189,42"
+          Id="Package\GetMaxLastUpdateDate"
+          TopLeft="287,419" />
+        <NodeLayout
+          Size="198,42"
+          Id="Package\Merge Temp And Staging"
+          TopLeft="61,312" />
+        <NodeLayout
+          Size="334,42"
+          Id="Package\Truncate table W_QWIKLEADS_PRODUCT_STG_TEMP"
+          TopLeft="495,276" />
+        <NodeLayout
+          Size="308,42"
+          Id="Package\Truncate W_QWIKLEADS_PRODUCT_STG_TEMP"
+          TopLeft="224,50" />
+        <NodeLayout
+          Size="152,42"
+          Id="Package\UpdateETLDate"
+          TopLeft="567,363" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="378,92">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-220.5,35"
+              Start="0,0"
+              End="-220.5,27.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.5"
+                    Point2="0,17.5"
+                    Point3="-4,17.5" />
+                  <mssgle:LineSegment
+                    End="-216.5,17.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-216.5,17.5"
+                    Point2="-220.5,17.5"
+                    Point3="-220.5,21.5" />
+                  <mssgle:LineSegment
+                    End="-220.5,27.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="159.75,169">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39"
+              Start="0,0"
+              End="0,31.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="161,250">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,62"
+              Start="0,0"
+              End="0,54.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,54.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="160,354">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="221.5,65"
+              Start="0,0"
+              End="221.5,57.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28.5"
+                    Point2="0,32.5"
+                    Point3="4,32.5" />
+                  <mssgle:LineSegment
+                    End="217.5,32.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="217.5,32.5"
+                    Point2="221.5,32.5"
+                    Point3="221.5,36.5" />
+                  <mssgle:LineSegment
+                    End="221.5,57.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="476,440">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="91,-56"
+              Start="0,0"
+              End="83.5,-56">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="41.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="41.5,0"
+                    Point2="45.5,0"
+                    Point3="45.5,-4" />
+                  <mssgle:LineSegment
+                    End="45.5,-52" />
+                  <mssgle:CubicBezierSegment
+                    Point1="45.5,-52"
+                    Point2="45.5,-56"
+                    Point3="49.5,-56" />
+                  <mssgle:LineSegment
+                    End="83.5,-56" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="643,363">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="19,-45"
+              Start="0,0"
+              End="19,-37.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-18.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-18.5"
+                    Point2="0,-22.5"
+                    Point3="4,-22.5" />
+                  <mssgle:LineSegment
+                    End="15,-22.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="15,-22.5"
+                    Point2="19,-22.5"
+                    Point3="19,-26.5" />
+                  <mssgle:LineSegment
+                    End="19,-37.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\FROM SOURCE TO STAGING">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="263,42"
+          Id="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP"
+          TopLeft="149,217" />
+        <NodeLayout
+          Size="169,42"
+          Id="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE"
+          TopLeft="148,107" />
+        <EdgeLayout
+          Id="Package\FROM SOURCE TO STAGING.Paths[OLE DB Source Output]"
+          TopLeft="232.5,149">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="48,68"
+              Start="0,0"
+              End="48,60.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,30"
+                    Point2="0,34"
+                    Point3="4,34" />
+                  <mssgle:LineSegment
+                    End="44,34" />
+                  <mssgle:CubicBezierSegment
+                    Point1="44,34"
+                    Point2="48,34"
+                    Point3="48,38" />
+                  <mssgle:LineSegment
+                    End="48,60.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\FROM SOURCE TO STAGING\PRODUCT SOURCE">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\FROM SOURCE TO STAGING\W_QWIKLEADS_PRODUCT_STG_TEMP">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

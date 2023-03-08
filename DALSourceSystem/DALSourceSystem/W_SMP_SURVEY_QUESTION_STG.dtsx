@@ -1,0 +1,686 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/13/2022 10:30:10 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DC2-DWHS-V-02"
+  DTS:CreatorName="SALE-CO\mijaz.c"
+  DTS:DTSID="{90E9C05D-4764-4C1D-8414-6ED846751248}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.1601.5"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="W_SMP_SURVEY_QUESTION_STG"
+  DTS:PackageType="5"
+  DTS:VersionBuild="12"
+  DTS:VersionGUID="{CC29F5CF-CA67-45A4-AD6C-4A7DFD55F637}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Insert into survey_question"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{5F6B15F0-415E-4523-A359-08938F83105B}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert into survey_question"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Insert into survey_question\survey_question"
+              componentClassID="Attunity.SSISODBCSrc"
+              contactInfo="ODBC Source;Connector for Open Database Connectivity (ODBC) by Attunity; Attunity Ltd.; All Rights Reserved; http://www.attunity.com;6"
+              description="ODBC Source"
+              name="survey_question"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="The name of the table to be fetched."
+                  expressionType="Notify"
+                  name="TableName"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand">SELECT * from smp.survey_question</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the number of rows fetched per batch."
+                  expressionType="Notify"
+                  name="BatchSize">1000</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines the chunk size allocation for LOB columns"
+                  expressionType="Notify"
+                  name="LobChunkSize">32768</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines how the component exposes CHAR columns. If False, CHAR columns are exposed as (multi-)byte strings (DT_STR), if True, CHAR columns are exposed as wide strings (DT_WSTR)"
+                  expressionType="Notify"
+                  name="ExposeCharColumnsAsUnicode">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds to wait for an SQL statement to execute before returning to the application."
+                  expressionType="Notify"
+                  name="StatementTimeout">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The code page to use when code page information is unavailable from the data source."
+                  expressionType="Notify"
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Int32"
+                  description="The mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="The method used for fetching data."
+                  expressionType="Notify"
+                  name="FetchMethod"
+                  typeConverter="FetchMethod">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="The ODBC C data type for binding numeric data."
+                  expressionType="Notify"
+                  name="BindNumericAs"
+                  typeConverter="BindNumericAs">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines how the component would bind columns of (multi)-byte string types (i.e., SQL_CHAR, SQL_VARCHAR, SQL_LONGVARCHAR). The options are: Unicode (SQL_C_WCHAR) and ANSI (SQL_C_CHAR)."
+                  expressionType="Notify"
+                  name="BindCharColumnsAs"
+                  typeConverter="BindCharColumnsAs">0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Insert into survey_question\survey_question.Connections[ODBCConnection]"
+                  connectionManagerID="{03E0A564-6C13-4F39-9D9D-D7FD71B716DD}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DalSourceSystem]"
+                  description="The ODBC runtime connection"
+                  name="ODBCConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output]"
+                  errorRowDisposition="FailComponent"
+                  name="ODBC Source Output"
+                  truncationRowDisposition="FailComponent">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].Columns[id]"
+                      dataType="i8"
+                      externalMetadataColumnId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].ExternalColumns[id]"
+                      lineageId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].Columns[id]"
+                      name="id" />
+                    <outputColumn
+                      refId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].Columns[survey_question_id]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].ExternalColumns[survey_question_id]"
+                      length="255"
+                      lineageId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].Columns[survey_question_id]"
+                      name="survey_question_id" />
+                    <outputColumn
+                      refId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].Columns[question_type]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].ExternalColumns[question_type]"
+                      length="255"
+                      lineageId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].Columns[question_type]"
+                      name="question_type" />
+                    <outputColumn
+                      refId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].Columns[question]"
+                      dataType="nText"
+                      externalMetadataColumnId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].ExternalColumns[question]"
+                      lineageId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].Columns[question]"
+                      name="question" />
+                    <outputColumn
+                      refId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].Columns[survey_id]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].ExternalColumns[survey_id]"
+                      length="255"
+                      lineageId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].Columns[survey_id]"
+                      name="survey_id" />
+                    <outputColumn
+                      refId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].Columns[order_by]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].ExternalColumns[order_by]"
+                      length="255"
+                      lineageId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].Columns[order_by]"
+                      name="order_by" />
+                    <outputColumn
+                      refId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].Columns[is_required]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].ExternalColumns[is_required]"
+                      length="255"
+                      lineageId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].Columns[is_required]"
+                      name="is_required" />
+                    <outputColumn
+                      refId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].Columns[question_header]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].ExternalColumns[question_header]"
+                      length="500"
+                      lineageId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].Columns[question_header]"
+                      name="question_header" />
+                    <outputColumn
+                      refId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].Columns[weight]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].ExternalColumns[weight]"
+                      length="255"
+                      lineageId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].Columns[weight]"
+                      name="weight" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].ExternalColumns[id]"
+                      dataType="i8"
+                      name="id" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].ExternalColumns[survey_question_id]"
+                      dataType="wstr"
+                      length="255"
+                      name="survey_question_id" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].ExternalColumns[question_type]"
+                      dataType="wstr"
+                      length="255"
+                      name="question_type" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].ExternalColumns[question]"
+                      dataType="nText"
+                      name="question" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].ExternalColumns[survey_id]"
+                      dataType="wstr"
+                      length="255"
+                      name="survey_id" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].ExternalColumns[order_by]"
+                      dataType="wstr"
+                      length="255"
+                      name="order_by" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].ExternalColumns[is_required]"
+                      dataType="wstr"
+                      length="255"
+                      name="is_required" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].ExternalColumns[question_header]"
+                      dataType="wstr"
+                      length="500"
+                      name="question_header" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].ExternalColumns[weight]"
+                      dataType="wstr"
+                      length="255"
+                      name="weight" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Error Output]"
+                  isErrorOut="true"
+                  name="ODBC Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Error Output].Columns[id]"
+                      dataType="i8"
+                      externalMetadataColumnId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].ExternalColumns[id]"
+                      lineageId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Error Output].Columns[id]"
+                      name="id" />
+                    <outputColumn
+                      refId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Error Output].Columns[survey_question_id]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].ExternalColumns[survey_question_id]"
+                      length="255"
+                      lineageId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Error Output].Columns[survey_question_id]"
+                      name="survey_question_id" />
+                    <outputColumn
+                      refId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Error Output].Columns[question_type]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].ExternalColumns[question_type]"
+                      length="255"
+                      lineageId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Error Output].Columns[question_type]"
+                      name="question_type" />
+                    <outputColumn
+                      refId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Error Output].Columns[question]"
+                      dataType="nText"
+                      externalMetadataColumnId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].ExternalColumns[question]"
+                      lineageId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Error Output].Columns[question]"
+                      name="question" />
+                    <outputColumn
+                      refId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Error Output].Columns[survey_id]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].ExternalColumns[survey_id]"
+                      length="255"
+                      lineageId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Error Output].Columns[survey_id]"
+                      name="survey_id" />
+                    <outputColumn
+                      refId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Error Output].Columns[order_by]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].ExternalColumns[order_by]"
+                      length="255"
+                      lineageId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Error Output].Columns[order_by]"
+                      name="order_by" />
+                    <outputColumn
+                      refId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Error Output].Columns[is_required]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].ExternalColumns[is_required]"
+                      length="255"
+                      lineageId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Error Output].Columns[is_required]"
+                      name="is_required" />
+                    <outputColumn
+                      refId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Error Output].Columns[question_header]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].ExternalColumns[question_header]"
+                      length="500"
+                      lineageId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Error Output].Columns[question_header]"
+                      name="question_header" />
+                    <outputColumn
+                      refId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Error Output].Columns[weight]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].ExternalColumns[weight]"
+                      length="255"
+                      lineageId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Error Output].Columns[weight]"
+                      name="weight" />
+                    <outputColumn
+                      refId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="W_SMP_SURVEY_QUESTION_STG"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[W_SMP_SURVEY_QUESTION_STG]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG.Connections[OleDbConnection]"
+                  connectionManagerID="{78779782-C63A-46A8-AFA5-227BB8602DA6}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG.Inputs[OLE DB Destination Input].Columns[id]"
+                      cachedDataType="i8"
+                      cachedName="id"
+                      externalMetadataColumnId="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG.Inputs[OLE DB Destination Input].ExternalColumns[id]"
+                      lineageId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].Columns[id]" />
+                    <inputColumn
+                      refId="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG.Inputs[OLE DB Destination Input].Columns[survey_question_id]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="survey_question_id"
+                      externalMetadataColumnId="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG.Inputs[OLE DB Destination Input].ExternalColumns[survey_question_id]"
+                      lineageId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].Columns[survey_question_id]" />
+                    <inputColumn
+                      refId="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG.Inputs[OLE DB Destination Input].Columns[question_type]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="question_type"
+                      externalMetadataColumnId="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG.Inputs[OLE DB Destination Input].ExternalColumns[question_type]"
+                      lineageId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].Columns[question_type]" />
+                    <inputColumn
+                      refId="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG.Inputs[OLE DB Destination Input].Columns[question]"
+                      cachedDataType="nText"
+                      cachedName="question"
+                      externalMetadataColumnId="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG.Inputs[OLE DB Destination Input].ExternalColumns[question]"
+                      lineageId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].Columns[question]" />
+                    <inputColumn
+                      refId="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG.Inputs[OLE DB Destination Input].Columns[survey_id]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="survey_id"
+                      externalMetadataColumnId="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG.Inputs[OLE DB Destination Input].ExternalColumns[survey_id]"
+                      lineageId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].Columns[survey_id]" />
+                    <inputColumn
+                      refId="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG.Inputs[OLE DB Destination Input].Columns[order_by]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="order_by"
+                      externalMetadataColumnId="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG.Inputs[OLE DB Destination Input].ExternalColumns[order_by]"
+                      lineageId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].Columns[order_by]" />
+                    <inputColumn
+                      refId="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG.Inputs[OLE DB Destination Input].Columns[is_required]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="is_required"
+                      externalMetadataColumnId="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG.Inputs[OLE DB Destination Input].ExternalColumns[is_required]"
+                      lineageId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].Columns[is_required]" />
+                    <inputColumn
+                      refId="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG.Inputs[OLE DB Destination Input].Columns[question_header]"
+                      cachedDataType="wstr"
+                      cachedLength="500"
+                      cachedName="question_header"
+                      externalMetadataColumnId="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG.Inputs[OLE DB Destination Input].ExternalColumns[question_header]"
+                      lineageId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].Columns[question_header]" />
+                    <inputColumn
+                      refId="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG.Inputs[OLE DB Destination Input].Columns[weight]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="weight"
+                      externalMetadataColumnId="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG.Inputs[OLE DB Destination Input].ExternalColumns[weight]"
+                      lineageId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output].Columns[weight]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG.Inputs[OLE DB Destination Input].ExternalColumns[id]"
+                      dataType="i8"
+                      name="id" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG.Inputs[OLE DB Destination Input].ExternalColumns[survey_question_id]"
+                      dataType="wstr"
+                      length="255"
+                      name="survey_question_id" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG.Inputs[OLE DB Destination Input].ExternalColumns[question_type]"
+                      dataType="wstr"
+                      length="255"
+                      name="question_type" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG.Inputs[OLE DB Destination Input].ExternalColumns[question]"
+                      dataType="nText"
+                      name="question" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG.Inputs[OLE DB Destination Input].ExternalColumns[survey_id]"
+                      dataType="wstr"
+                      length="255"
+                      name="survey_id" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG.Inputs[OLE DB Destination Input].ExternalColumns[order_by]"
+                      dataType="wstr"
+                      length="255"
+                      name="order_by" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG.Inputs[OLE DB Destination Input].ExternalColumns[is_required]"
+                      dataType="wstr"
+                      length="255"
+                      name="is_required" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG.Inputs[OLE DB Destination Input].ExternalColumns[question_header]"
+                      dataType="wstr"
+                      length="500"
+                      name="question_header" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG.Inputs[OLE DB Destination Input].ExternalColumns[weight]"
+                      dataType="wstr"
+                      length="255"
+                      name="weight" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Insert into survey_question.Paths[ODBC Source Output]"
+              endId="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG.Inputs[OLE DB Destination Input]"
+              name="ODBC Source Output"
+              startId="Package\Insert into survey_question\survey_question.Outputs[ODBC Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate W_SMP_SURVEY_QUESTION_STG"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{2F6A30F5-C927-4039-8517-7C89ABE11E51}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate W_SMP_SURVEY_QUESTION_STG"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{78779782-C63A-46A8-AFA5-227BB8602DA6}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE [W_SMP_SURVEY_QUESTION_STG]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{C87C4A43-DA58-468A-9CB2-ABD9FB056074}"
+      DTS:From="Package\Truncate W_SMP_SURVEY_QUESTION_STG"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Insert into survey_question" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="208,42"
+          Id="Package\Insert into survey_question"
+          TopLeft="228,134" />
+        <NodeLayout
+          Size="286,42"
+          Id="Package\Truncate W_SMP_SURVEY_QUESTION_STG"
+          TopLeft="246,43" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="389,85">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-57,49"
+              Start="0,0"
+              End="-57,41.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.5"
+                    Point2="0,24.5"
+                    Point3="-4,24.5" />
+                  <mssgle:LineSegment
+                    End="-53,24.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-53,24.5"
+                    Point2="-57,24.5"
+                    Point3="-57,28.5" />
+                  <mssgle:LineSegment
+                    End="-57,41.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Insert into survey_question">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="241,42"
+          Id="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG"
+          TopLeft="366,250" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Insert into survey_question\survey_question"
+          TopLeft="196,144" />
+        <EdgeLayout
+          Id="Package\Insert into survey_question.Paths[ODBC Source Output]"
+          TopLeft="274,186">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="212.5,64"
+              Start="0,0"
+              End="212.5,56.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28"
+                    Point2="0,32"
+                    Point3="4,32" />
+                  <mssgle:LineSegment
+                    End="208.5,32" />
+                  <mssgle:CubicBezierSegment
+                    Point1="208.5,32"
+                    Point2="212.5,32"
+                    Point3="212.5,36" />
+                  <mssgle:LineSegment
+                    End="212.5,56.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Insert into survey_question\survey_question">
+    <Properties>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Insert into survey_question\W_SMP_SURVEY_QUESTION_STG">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
